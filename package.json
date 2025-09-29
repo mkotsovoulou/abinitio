@@ -1,7 +1,6 @@
 {
-  "name": "flashcards-app",
+  "name": "spanish-words-app",
   "version": "1.0.0",
-  "description": "Spanish flashcards app with chapters 1A-1D",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
