@@ -159,6 +159,8 @@ function showCard(){
   $("card").textContent=card.es;
   $("translation").style.display="none";
   $("translation").textContent=card.en;
+  $("knowBtn").style.display="inline-block";
+  $("dontKnowBtn").style.display="inline-block";
   $("nextBtn").style.display="none";
   revealed=false;
 }
@@ -167,6 +169,9 @@ function handleAnswer(isKnown){
   if(!revealed){
     $("translation").style.display="block";
     if(isKnown) score++;
+    // hide know/don't know, show NEXT
+    $("knowBtn").style.display="none";
+    $("dontKnowBtn").style.display="none";
     $("nextBtn").style.display="inline-block";
     revealed=true;
   }
