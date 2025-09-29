@@ -131,7 +131,7 @@ async function loadFlashcards() {
   chapters.forEach(ch => {
     const opt = document.createElement("option");
     opt.value = ch.chapter;
-    opt.textContent = `Chapter ${ch.chapter}: ${ch.title}`;
+     opt.textContent = `Chapter ${ch.chapter}: ${ch.title} (${ch.totalWords} words)`;
     select.appendChild(opt);
   });
 }
