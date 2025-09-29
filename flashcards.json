@@ -1,0 +1,70 @@
+[
+  {
+    "chapter": "1A",
+    "title": "Características personales",
+    "words": [
+      {
+        "es": "el apellido",
+        "en": "surname / family name"
+      },
+      {
+        "es": "el primer nombre",
+        "en": "first name"
+      },
+      {
+        "es": "el segundo nombre",
+        "en": "middle name"
+      },
+      {
+        "es": "el seudónimo, el apodo",
+        "en": "nickname"
+      },
+      {
+        "es": "la edad",
+        "en": "age"
+      }
+    ]
+  },
+  {
+    "chapter": "1B",
+    "title": "Relaciones personales",
+    "words": [
+      {
+        "es": "una madre / una madrastra / una suegra",
+        "en": "mother / stepmother / mother-in-law"
+      },
+      {
+        "es": "un padre / un padrastro / un suegro",
+        "en": "father / stepfather / father-in-law"
+      }
+    ]
+  },
+  {
+    "chapter": "1C",
+    "title": "Comidas y bebidas",
+    "words": [
+      {
+        "es": "el desayuno",
+        "en": "breakfast"
+      },
+      {
+        "es": "el almuerzo",
+        "en": "lunch"
+      }
+    ]
+  },
+  {
+    "chapter": "1D",
+    "title": "El bienestar físico",
+    "words": [
+      {
+        "es": "estar mal de salud / tener mala salud",
+        "en": "to be in poor health"
+      },
+      {
+        "es": "estar enfermo(a) / enfermarse",
+        "en": "to be/become ill"
+      }
+    ]
+  }
+]

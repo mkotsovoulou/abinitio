@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spanish Flashcards</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    #card { font-size: 3rem; margin: 1rem 0; }
+    #translation { font-size: 1.5rem; color: #666; margin-bottom: 1rem; }
+    button { margin: 0.5rem; padding: 0.75rem 1.25rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <section id="setup" class="panel active">
+    <h2>Spanish Flashcards Trainer</h2>
+    <label for="chapterSelect">Choose a chapter:</label>
+    <select id="chapterSelect"></select>
+    <br><br>
+    <label for="wordCount">How many words?</label>
+    <input type="number" id="wordCount" min="1" value="5" />
+    <br><br>
+    <button id="startBtn">Start</button>
+  </section>
+
+  <section id="flashcard" class="panel">
+    <div id="progress"></div>
+    <div id="card"></div>
+    <div id="translation"></div>
+    <button id="knowBtn">I Know This</button>
+    <button id="nextBtn">Next</button>
+  </section>
+
+  <section id="results" class="panel">
+    <h2>Session Finished 🎉</h2>
+    <p id="score"></p>
+    <button id="restartBtn">Restart</button>
+  </section>
+
+<script>
+let chapters = [];
+let sessionCards = [];
+let currentIndex = 0;
+let score = 0;
+
+function $(id){ return document.getElementById(id); }
+
+async function loadFlashcards() {
+  const res = await fetch("/api/flashcards");
+  chapters = await res.json();
+  const select = $("chapterSelect");
+  chapters.forEach(ch => {
+    const opt = document.createElement("option");
+    opt.value = ch.chapter;
+    opt.textContent = `Chapter ${ch.chapter}: ${ch.title}`;
+    select.appendChild(opt);
+  });
+}
+
+function startSession(){
+  const chId = $("chapterSelect").value;
+  const selected = chapters.find(c => c.chapter === chId);
+  let count = parseInt($("wordCount").value) || 1;
+  if(count > selected.words.length) count = selected.words.length;
+  sessionCards = shuffle([...selected.words]).slice(0,count);
+  currentIndex=0; score=0;
+  showPanel("flashcard");
+  showCard();
+}
+
+function showPanel(id){
+  ["setup","flashcard","results"].forEach(p=>$(p).classList.remove("active"));
+  $(id).classList.add("active");
+}
+
+function showCard(){
+  if(currentIndex>=sessionCards.length){ return endSession(); }
+  const card=sessionCards[currentIndex];
+  $("progress").textContent=`Card ${currentIndex+1} of ${sessionCards.length}`;
+  $("card").textContent=card.es;
+  $("translation").textContent=card.en;
+}
+
+function knowThis(){ score++; nextCard(); }
+function nextCard(){ currentIndex++; showCard(); }
+function endSession(){ showPanel("results"); $("score").textContent=`You knew ${score} of ${sessionCards.length}`; }
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+$("startBtn").onclick=startSession;
+$("knowBtn").onclick=knowThis;
+$("nextBtn").onclick=nextCard;
+$("restartBtn").onclick=()=>location.reload();
+
+loadFlashcards();
+</script>
+</body>
+</html>
