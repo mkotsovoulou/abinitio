@@ -1,12 +1,12 @@
 // server.js
 const express = require("express");
 const path = require("path");
+const fs = require("fs"); // <-- you need this
 
 const app = express();
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, "public")));
-
 
 // API endpoint to serve flashcards.json
 app.get("/api/flashcards", (req, res) => {
@@ -17,7 +17,6 @@ app.get("/api/flashcards", (req, res) => {
     res.json(JSON.parse(data));
   });
 });
-
 
 // Fallback to index.html (in case you’re using a single page app)
 app.get("*", (req, res) => {
