@@ -1,17 +1,19 @@
+// server.js
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
+
 const app = express();
-const PORT = 3000;
 
-const chapters = JSON.parse(fs.readFileSync(path.join(__dirname, "flashcards.json"), "utf-8"));
-
+// Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/api/flashcards", (req, res) => {
-  res.json(chapters);
+// Fallback to index.html (in case you’re using a single page app)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// Heroku provides the PORT via environment variable
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Flashcards app running at http://localhost:${PORT}`);
+  console.log(`Spanish Words App running on port ${PORT}`);
 });
