@@ -5,38 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Spanish Flashcards</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; }
-    .panel { display: none; }
+    :root {
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #7c3aed;
+      --accent-2: #2563eb;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .panel {
+      width: min(920px, 100%);
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      padding: 24px;
+      display: none;
+    }
     .panel.active { display: block; }
-    #card { font-size: 3rem; margin: 1rem 0; }
-    #translation { font-size: 1.5rem; color: #666; margin-bottom: 1rem; }
-    button { margin: 0.5rem; padding: 0.75rem 1.25rem; font-size: 1rem; }
+    h2 { margin: 0 0 12px; font-weight: 700; }
+    label { font-weight: 600; }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 12px 14px;
+      margin-top: 6px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn {
+      appearance: none;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-know { background: var(--success); color: #fff; }
+    .btn-dontknow { background: var(--danger); color: #fff; }
+    .btn-next { background: var(--accent-2); color: #fff; display: none; }
+    .stack { display: grid; gap: 12px; }
+    .center { text-align: center; }
+    #card {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 800;
+      margin: 24px 0 10px;
+    }
+    #translation {
+      font-size: clamp(22px, 3.2vw, 34px);
+      color: var(--muted);
+      margin-bottom: 18px;
+      display: none;
+    }
+    #progress { color: var(--muted); font-weight: 600; }
   </style>
 </head>
 <body>
+  <!-- Setup -->
   <section id="setup" class="panel active">
     <h2>Spanish Flashcards Trainer</h2>
-    <label for="chapterSelect">Choose a chapter:</label>
-    <select id="chapterSelect"></select>
-    <br><br>
-    <label for="wordCount">How many words?</label>
-    <input type="number" id="wordCount" min="1" value="5" />
-    <br><br>
-    <button id="startBtn">Start</button>
+    <div class="stack">
+      <div>
+        <label for="chapterSelect">Choose a chapter</label>
+        <select id="chapterSelect"></select>
+      </div>
+      <div class="row">
+        <div>
+          <label for="wordCount">How many words?</label>
+          <input type="number" id="wordCount" min="1" value="10" />
+        </div>
+        <div class="center" style="align-self:end;">
+          <button id="startBtn" class="btn btn-primary">Start</button>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- Flashcard -->
   <section id="flashcard" class="panel">
     <div id="progress"></div>
-    <div id="card"></div>
-    <div id="translation"></div>
-    <button id="knowBtn">I Know This</button>
-    <button id="nextBtn">Next</button>
+    <div id="card" class="center">Loading…</div>
+    <div id="translation" class="center"></div>
+    <div class="center">
+      <button id="knowBtn" class="btn btn-know">I Know This</button>
+      <button id="dontKnowBtn" class="btn btn-dontknow">I Don't Know This</button>
+      <button id="nextBtn" class="btn btn-next">Next</button>
+    </div>
   </section>
 
+  <!-- Results -->
   <section id="results" class="panel">
     <h2>Session Finished 🎉</h2>
     <p id="score"></p>
-    <button id="restartBtn">Restart</button>
+    <button id="restartBtn" class="btn btn-primary">Restart</button>
   </section>
 
 <script>
@@ -44,6 +120,7 @@ let chapters = [];
 let sessionCards = [];
 let currentIndex = 0;
 let score = 0;
+let revealed = false;
 
 function $(id){ return document.getElementById(id); }
 
@@ -80,17 +157,28 @@ function showCard(){
   const card=sessionCards[currentIndex];
   $("progress").textContent=`Card ${currentIndex+1} of ${sessionCards.length}`;
   $("card").textContent=card.es;
+  $("translation").style.display="none";
   $("translation").textContent=card.en;
+  $("nextBtn").style.display="none";
+  revealed=false;
 }
 
-function knowThis(){ score++; nextCard(); }
+function handleAnswer(isKnown){
+  if(!revealed){
+    $("translation").style.display="block";
+    if(isKnown) score++;
+    $("nextBtn").style.display="inline-block";
+    revealed=true;
+  }
+}
+
 function nextCard(){ currentIndex++; showCard(); }
 function endSession(){ showPanel("results"); $("score").textContent=`You knew ${score} of ${sessionCards.length}`; }
-
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 $("startBtn").onclick=startSession;
-$("knowBtn").onclick=knowThis;
+$("knowBtn").onclick=()=>handleAnswer(true);
+$("dontKnowBtn").onclick=()=>handleAnswer(false);
 $("nextBtn").onclick=nextCard;
 $("restartBtn").onclick=()=>location.reload();
 
