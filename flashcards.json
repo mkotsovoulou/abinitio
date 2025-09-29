@@ -1,7 +1,8 @@
 [
   {
-    "chapter": "A",
+    "chapter": "1A",
     "title": "Características personales",
+    "totalWords": 99,
     "words": [
       {
         "es": "el apellido",
@@ -16,7 +17,7 @@
         "en": "middle name"
       },
       {
-        "es": "el seudónimo, el apodo",
+        "es": "el seudónimo / el apodo",
         "en": "nickname"
       },
       {
@@ -64,7 +65,7 @@
         "en": "to be of Spanish / Argentinian origin"
       },
       {
-        "es": "sentirse español / argentino",
+        "es": "sentirse español(a) / argentino(a)",
         "en": "to feel Spanish / Argentinian"
       },
       {
@@ -108,8 +109,8 @@
         "en": "to be tall"
       },
       {
-        "es": "ser de mediana estatura",
-        "en": "to be of average height"
+        "es": "de mediana estatura",
+        "en": "of average height"
       },
       {
         "es": "ser delgado(a) / flaco(a)",
@@ -120,40 +121,136 @@
         "en": "to be thick set / stout / chunky"
       },
       {
-        "es": "tener los ojos azules / verdes / marrones / avellana / grises",
-        "en": "to have blue / green / brown / hazel / grey eyes"
+        "es": "tener los ojos azules",
+        "en": "to have blue eyes"
       },
       {
-        "es": "tener el pelo rubio / castaño / negro / rojo / gris / blanco",
-        "en": "to have blond / brown / black / ginger / grey / white hair"
+        "es": "tener los ojos verdes",
+        "en": "to have green eyes"
       },
       {
-        "es": "tener el pelo corto / largo / liso / ondulado / rizado / afro",
-        "en": "to have short / long / straight / wavy / curly / afro hair"
+        "es": "tener los ojos marrones",
+        "en": "to have brown eyes"
+      },
+      {
+        "es": "tener los ojos avellana",
+        "en": "to have hazel eyes"
+      },
+      {
+        "es": "tener los los ojos grises",
+        "en": "to have grey eyes"
+      },
+      {
+        "es": "tener el pelo rubio",
+        "en": "to have blond hair"
+      },
+      {
+        "es": "tener el pelo castaño",
+        "en": "to have brown hair"
+      },
+      {
+        "es": "tener el pelo negro",
+        "en": "to have black hair"
+      },
+      {
+        "es": "tener el pelo rojo",
+        "en": "to have ginger hair"
+      },
+      {
+        "es": "tener el pelo gris",
+        "en": "to have grey hair"
+      },
+      {
+        "es": "tener el pelo blanco",
+        "en": "to have white hair"
+      },
+      {
+        "es": "tener el pelo corto",
+        "en": "to have short hair"
+      },
+      {
+        "es": "tener el pelo largo",
+        "en": "to have long hair"
+      },
+      {
+        "es": "tener el pelo liso",
+        "en": "to have straight hair"
+      },
+      {
+        "es": "tener el pelo ondulado",
+        "en": "to have wavy hair"
+      },
+      {
+        "es": "tener el pelo rizado",
+        "en": "to have curly hair"
+      },
+      {
+        "es": "tener el pelo afro",
+        "en": "to have afro hair"
       },
       {
         "es": "ser calvo(a)",
         "en": "to be bald"
       },
       {
-        "es": "tener barba / bigote",
-        "en": "to have a beard / moustache"
+        "es": "tener barba",
+        "en": "to have a beard"
       },
       {
-        "es": "tener piel clara / mate / oscura",
-        "en": "to have light / olive / dark skin"
+        "es": "tener bigote",
+        "en": "to have a moustache"
       },
       {
-        "es": "tener pecas / arrugas / granos / una cicatriz",
-        "en": "to have freckles / wrinkles / pimples / a scar"
+        "es": "tener piel clara",
+        "en": "to have light skin"
       },
       {
-        "es": "usar anteojos / lentes de contacto / aparatos",
-        "en": "to wear glasses / contacts / braces"
+        "es": "tener piel mate",
+        "en": "to have olive skin"
       },
       {
-        "es": "llevar el cabello en una cola de caballo / coletas / trenzas / un moño",
-        "en": "to wear hair in a ponytail / pigtails / braids / bun"
+        "es": "tener piel oscura",
+        "en": "to have dark skin"
+      },
+      {
+        "es": "tener pecas",
+        "en": "to have freckles"
+      },
+      {
+        "es": "tener arrugas",
+        "en": "to have wrinkles"
+      },
+      {
+        "es": "tener granos (acné)",
+        "en": "to have pimples (acne)"
+      },
+      {
+        "es": "tener una cicatriz",
+        "en": "to have a scar"
+      },
+      {
+        "es": "usar anteojos / lentes de contacto",
+        "en": "to wear glasses / contacts"
+      },
+      {
+        "es": "usar aparatos",
+        "en": "to wear braces"
+      },
+      {
+        "es": "llevar el cabello en una cola de caballo",
+        "en": "to wear hair in a ponytail"
+      },
+      {
+        "es": "llevar el cabello con coletas",
+        "en": "to wear hair in pigtails"
+      },
+      {
+        "es": "llevar el cabello con trenzas",
+        "en": "to wear hair in braids"
+      },
+      {
+        "es": "llevar el cabello con un moño",
+        "en": "to wear hair in a bun"
       },
       {
         "es": "cuidar tu apariencia",
@@ -164,24 +261,44 @@
         "en": "to put on make-up"
       },
       {
-        "es": "tener un tatuaje / un piercing",
-        "en": "to have a tattoo / piercing"
+        "es": "tener un tatuaje",
+        "en": "to have a tattoo"
       },
       {
-        "es": "vestirse de manera elegante / informal",
-        "en": "to dress smart / casual"
+        "es": "tener un piercing",
+        "en": "to have a piercing"
       },
       {
-        "es": "ponerse atuendos elegantes / descuidados / excéntricos",
-        "en": "to wear elegant / scruffy / eccentric clothes"
+        "es": "vestirse de manera elegante",
+        "en": "to dress smart"
+      },
+      {
+        "es": "vestirse de manera informal",
+        "en": "to dress casual"
+      },
+      {
+        "es": "ponerse atuendos elegantes",
+        "en": "to wear elegant clothes"
+      },
+      {
+        "es": "ponerse atuendos descuidados",
+        "en": "to wear scruffy clothes"
+      },
+      {
+        "es": "ponerse atuendos excéntricos",
+        "en": "to wear eccentric clothes"
       },
       {
         "es": "ser simpático(a)",
         "en": "to be friendly"
       },
       {
-        "es": "ser pesimista / optimista",
-        "en": "to be pessimistic / optimistic"
+        "es": "ser pesimista",
+        "en": "to be pessimistic"
+      },
+      {
+        "es": "ser optimista",
+        "en": "to be optimistic"
       },
       {
         "es": "ser amable",
@@ -196,8 +313,12 @@
         "en": "to be annoying"
       },
       {
-        "es": "ser tímido(a) / calmado(a)",
-        "en": "to be shy / calm"
+        "es": "ser tímido(a)",
+        "en": "to be shy"
+      },
+      {
+        "es": "ser calmado(a)",
+        "en": "to be calm"
       },
       {
         "es": "ser gracioso(a)",
@@ -268,8 +389,12 @@
         "en": "to have common sense"
       },
       {
-        "es": "inspirar confianza / respeto",
-        "en": "to inspire confidence / respect"
+        "es": "inspirar confianza",
+        "en": "to inspire confidence"
+      },
+      {
+        "es": "inspirar respeto",
+        "en": "to inspire respect"
       },
       {
         "es": "mostrar alegría por vivir",
@@ -278,8 +403,9 @@
     ]
   },
   {
-    "chapter": "B",
+    "chapter": "1B",
     "title": "Relaciones personales",
+    "totalWords": 29,
     "words": [
       {
         "es": "una madre / una madrastra / una suegra",
@@ -356,12 +482,53 @@
       {
         "es": "un vecino / una vecina",
         "en": "neighbour"
+      },
+      {
+        "es": "llevarse bien (con)",
+        "en": "to get on well (with)"
+      },
+      {
+        "es": "tener una buena relación (con)",
+        "en": "to have a good relationship (with)"
+      },
+      {
+        "es": "tener mucho en común (con)",
+        "en": "to have a lot in common (with)"
+      },
+      {
+        "es": "estar celoso(a) (de)",
+        "en": "to be jealous (of)"
+      },
+      {
+        "es": "discutir / pelearse (con)",
+        "en": "to argue / to fight (with)"
+      },
+      {
+        "es": "separarse / divorciarse",
+        "en": "to separate / to divorce"
+      },
+      {
+        "es": "coquetear / flirtear",
+        "en": "to flirt"
+      },
+      {
+        "es": "enamorarse",
+        "en": "to fall in love"
+      },
+      {
+        "es": "salir con alguien",
+        "en": "to go out with someone"
+      },
+      {
+        "es": "comprometerse / casarse",
+        "en": "to get engaged / to get married"
       }
     ]
   },
   {
-    "chapter": "C",
+    "chapter": "1C",
     "title": "Comidas y bebidas",
+    "totalWords": 34,
     "words": [
       {
         "es": "el desayuno",
@@ -372,98 +539,139 @@
         "en": "lunch"
       },
       {
+        "es": "la merienda",
+        "en": "afternoon snack"
+      },
+      {
         "es": "la cena",
         "en": "dinner"
       },
       {
-        "es": "la merienda",
-        "en": "snack"
+        "es": "una entrada",
+        "en": "starter"
       },
       {
-        "es": "la bebida",
-        "en": "drink"
+        "es": "un plato principal",
+        "en": "main dish"
       },
       {
-        "es": "el agua con gas / sin gas",
-        "en": "sparkling / still water"
-      },
-      {
-        "es": "el café con leche",
-        "en": "coffee with milk"
-      },
-      {
-        "es": "el té / la infusión",
-        "en": "tea / herbal tea"
-      },
-      {
-        "es": "el zumo / el jugo de naranja",
-        "en": "orange juice"
-      },
-      {
-        "es": "la leche",
-        "en": "milk"
-      },
-      {
-        "es": "el pan",
-        "en": "bread"
-      },
-      {
-        "es": "la mantequilla",
-        "en": "butter"
-      },
-      {
-        "es": "el queso",
-        "en": "cheese"
-      },
-      {
-        "es": "el jamón",
-        "en": "ham"
-      },
-      {
-        "es": "el huevo",
-        "en": "egg"
-      },
-      {
-        "es": "el pollo",
-        "en": "chicken"
-      },
-      {
-        "es": "la carne de res",
-        "en": "beef"
-      },
-      {
-        "es": "el pescado",
-        "en": "fish"
-      },
-      {
-        "es": "las verduras",
-        "en": "vegetables"
-      },
-      {
-        "es": "la fruta",
-        "en": "fruit"
-      },
-      {
-        "es": "la manzana / la pera / la uva",
-        "en": "apple / pear / grape"
-      },
-      {
-        "es": "la ensalada",
-        "en": "salad"
-      },
-      {
-        "es": "el postre",
+        "es": "un postre",
         "en": "dessert"
       },
       {
-        "es": "el helado",
-        "en": "ice cream"
+        "es": "un trago / una bebida",
+        "en": "a drink"
+      },
+      {
+        "es": "especialidad regional / nacional",
+        "en": "regional / national specialty"
+      },
+      {
+        "es": "tener hambre / tener sed",
+        "en": "to be hungry / to be thirsty"
+      },
+      {
+        "es": "cocinar / preparar la comida",
+        "en": "to cook / to prepare the meal"
+      },
+      {
+        "es": "restaurante / cafetería / café / bar",
+        "en": "restaurant / cafeteria / café / bar"
+      },
+      {
+        "es": "comida para llevar",
+        "en": "takeout / takeaway"
+      },
+      {
+        "es": "pedido a domicilio",
+        "en": "home delivery"
+      },
+      {
+        "es": "comida rápida / comida chatarra",
+        "en": "fast food / junk food"
+      },
+      {
+        "es": "refrescos / bebidas gaseosas",
+        "en": "soft drinks / fizzy drinks"
+      },
+      {
+        "es": "dulces / salados",
+        "en": "sweet / savoury"
+      },
+      {
+        "es": "mercado / supermercado / hipermercado",
+        "en": "market / supermarket / hypermarket"
+      },
+      {
+        "es": "panadería / carnicería / pescadería / verdulería",
+        "en": "bakery / butcher’s / fishmonger’s / greengrocer’s"
+      },
+      {
+        "es": "quesería / delicatessen",
+        "en": "cheese shop / delicatessen"
+      },
+      {
+        "es": "100 gramos / una libra / un kilo de",
+        "en": "100 grams / a pound / a kilo of"
+      },
+      {
+        "es": "(medio) litro / botella / lata / vaso de",
+        "en": "(half) litre / bottle / can / glass of"
+      },
+      {
+        "es": "caja / paquete / bol de",
+        "en": "box / packet / bowl of"
+      },
+      {
+        "es": "frasco / jarra de",
+        "en": "jar / jug of"
+      },
+      {
+        "es": "pedazo / porción de",
+        "en": "piece / portion of"
+      },
+      {
+        "es": "cucharadita / cucharada de",
+        "en": "teaspoon / tablespoon of"
+      },
+      {
+        "es": "productos frescos",
+        "en": "fresh produce"
+      },
+      {
+        "es": "alimentos bajos en grasa",
+        "en": "low-fat foods"
+      },
+      {
+        "es": "carbohidratos de liberación lenta",
+        "en": "slow-release carbohydrates"
+      },
+      {
+        "es": "comer equilibrado",
+        "en": "to eat a balanced diet"
+      },
+      {
+        "es": "cuidar la dieta",
+        "en": "to watch your diet"
+      },
+      {
+        "es": "vigilar el tamaño de las porciones",
+        "en": "to check portion sizes"
+      },
+      {
+        "es": "comer 5 porciones de fruta y verdura al día",
+        "en": "to eat five portions of fruit and vegetables a day"
+      },
+      {
+        "es": "elegir carnes blancas (pollo, pavo)",
+        "en": "to choose white meat (chicken, turkey)"
       }
     ]
   },
   {
-    "chapter": "D",
+    "chapter": "1D",
     "title": "El bienestar físico",
+    "totalWords": 32,
     "words": [
       {
         "es": "estar mal de salud / tener mala salud",
@@ -471,7 +679,7 @@
       },
       {
         "es": "estar enfermo(a) / enfermarse",
-        "en": "to be/become ill"
+        "en": "to be / to become ill"
       },
       {
         "es": "toser / estornudar",
@@ -482,16 +690,60 @@
         "en": "to have a fever"
       },
       {
-        "es": "tener dolor de cabeza / estómago",
-        "en": "to have a headache / stomach ache"
+        "es": "tener dolor de cabeza / garganta / pecho",
+        "en": "to have a headache / sore throat / chest pains"
       },
       {
-        "es": "tener una gripe / un resfriado",
-        "en": "to have the flu / a cold"
+        "es": "dolor de espalda / dolor de estómago",
+        "en": "backache / stomachache"
       },
       {
-        "es": "sentirse cansado(a)",
-        "en": "to feel tired"
+        "es": "dolor de muelas / dolor de oídos / dolor de ojos",
+        "en": "toothache / earache / sore eyes"
+      },
+      {
+        "es": "estar resfriado(a) / estar cansado(a)",
+        "en": "to have a cold / to be tired"
+      },
+      {
+        "es": "ser alérgico(a) a",
+        "en": "to be allergic to"
+      },
+      {
+        "es": "sufrir de problemas respiratorios / cardiacos",
+        "en": "to suffer from respiratory / cardiac problems"
+      },
+      {
+        "es": "síntomas de gripe / gastroenteritis / COVID-19",
+        "en": "symptoms of influenza / gastroenteritis / COVID-19"
+      },
+      {
+        "es": "ir a la farmacia / al médico / al hospital",
+        "en": "to go to the pharmacy / the doctor’s / the hospital"
+      },
+      {
+        "es": "consultar a un médico",
+        "en": "to consult a doctor"
+      },
+      {
+        "es": "no estar en forma",
+        "en": "not to be in good shape"
+      },
+      {
+        "es": "sentirse bien / mal",
+        "en": "to feel well / unwell"
+      },
+      {
+        "es": "tener una migraña / fiebre / asma",
+        "en": "to have a migraine / fever / asthma"
+      },
+      {
+        "es": "tener náuseas / dolor por todas partes",
+        "en": "to feel nauseous / to ache all over"
+      },
+      {
+        "es": "tener una alergia / una reacción alérgica a",
+        "en": "to have an allergy / an allergic reaction to"
       },
       {
         "es": "estar mareado(a)",
@@ -548,6 +800,21 @@
       {
         "es": "la medicina / el medicamento",
         "en": "medicine / medication"
+      }
+    ]
+  },
+  {
+    "chapter": "1E",
+    "title": "Template - Add Your Own",
+    "totalWords": 2,
+    "words": [
+      {
+        "es": "palabra",
+        "en": "word"
+      },
+      {
+        "es": "ejemplo",
+        "en": "example"
       }
     ]
   }
