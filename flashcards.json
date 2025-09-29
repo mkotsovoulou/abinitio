@@ -1,6 +1,6 @@
 [
   {
-    "chapter": "1A",
+    "chapter": "A",
     "title": "Características personales",
     "words": [
       {
@@ -22,11 +22,263 @@
       {
         "es": "la edad",
         "en": "age"
+      },
+      {
+        "es": "el cumpleaños",
+        "en": "birthday"
+      },
+      {
+        "es": "el día de nacimiento",
+        "en": "date of birth"
+      },
+      {
+        "es": "el país de origen",
+        "en": "country of origin"
+      },
+      {
+        "es": "la nacionalidad",
+        "en": "nationality"
+      },
+      {
+        "es": "el domicilio",
+        "en": "home address"
+      },
+      {
+        "es": "la lengua (materna)",
+        "en": "(mother) tongue / language"
+      },
+      {
+        "es": "tener x años",
+        "en": "to be x years old"
+      },
+      {
+        "es": "vivir en un pueblo / una ciudad",
+        "en": "to live in a village / a city"
+      },
+      {
+        "es": "ser de nacionalidad británica",
+        "en": "to be of British nationality"
+      },
+      {
+        "es": "tener origen español / argentino",
+        "en": "to be of Spanish / Argentinian origin"
+      },
+      {
+        "es": "sentirse español / argentino",
+        "en": "to feel Spanish / Argentinian"
+      },
+      {
+        "es": "tener doble nacionalidad",
+        "en": "to have dual nationality"
+      },
+      {
+        "es": "hablar inglés fluidamente",
+        "en": "to speak English fluently"
+      },
+      {
+        "es": "estar en la edad del pavo",
+        "en": "to be at that difficult age"
+      },
+      {
+        "es": "la apariencia física",
+        "en": "physical appearance"
+      },
+      {
+        "es": "la silueta / la figura",
+        "en": "figure"
+      },
+      {
+        "es": "el cuerpo",
+        "en": "body"
+      },
+      {
+        "es": "la cara / el rostro",
+        "en": "face"
+      },
+      {
+        "es": "la ropa / el atuendo",
+        "en": "clothes / clothing"
+      },
+      {
+        "es": "ser pequeño(a) / bajo(a)",
+        "en": "to be small / short"
+      },
+      {
+        "es": "ser alto(a)",
+        "en": "to be tall"
+      },
+      {
+        "es": "ser de mediana estatura",
+        "en": "to be of average height"
+      },
+      {
+        "es": "ser delgado(a) / flaco(a)",
+        "en": "to be slim / thin"
+      },
+      {
+        "es": "ser fuerte / corpulento(a) / fornido(a)",
+        "en": "to be thick set / stout / chunky"
+      },
+      {
+        "es": "tener los ojos azules / verdes / marrones / avellana / grises",
+        "en": "to have blue / green / brown / hazel / grey eyes"
+      },
+      {
+        "es": "tener el pelo rubio / castaño / negro / rojo / gris / blanco",
+        "en": "to have blond / brown / black / ginger / grey / white hair"
+      },
+      {
+        "es": "tener el pelo corto / largo / liso / ondulado / rizado / afro",
+        "en": "to have short / long / straight / wavy / curly / afro hair"
+      },
+      {
+        "es": "ser calvo(a)",
+        "en": "to be bald"
+      },
+      {
+        "es": "tener barba / bigote",
+        "en": "to have a beard / moustache"
+      },
+      {
+        "es": "tener piel clara / mate / oscura",
+        "en": "to have light / olive / dark skin"
+      },
+      {
+        "es": "tener pecas / arrugas / granos / una cicatriz",
+        "en": "to have freckles / wrinkles / pimples / a scar"
+      },
+      {
+        "es": "usar anteojos / lentes de contacto / aparatos",
+        "en": "to wear glasses / contacts / braces"
+      },
+      {
+        "es": "llevar el cabello en una cola de caballo / coletas / trenzas / un moño",
+        "en": "to wear hair in a ponytail / pigtails / braids / bun"
+      },
+      {
+        "es": "cuidar tu apariencia",
+        "en": "to take care of your looks"
+      },
+      {
+        "es": "maquillarse",
+        "en": "to put on make-up"
+      },
+      {
+        "es": "tener un tatuaje / un piercing",
+        "en": "to have a tattoo / piercing"
+      },
+      {
+        "es": "vestirse de manera elegante / informal",
+        "en": "to dress smart / casual"
+      },
+      {
+        "es": "ponerse atuendos elegantes / descuidados / excéntricos",
+        "en": "to wear elegant / scruffy / eccentric clothes"
+      },
+      {
+        "es": "ser simpático(a)",
+        "en": "to be friendly"
+      },
+      {
+        "es": "ser pesimista / optimista",
+        "en": "to be pessimistic / optimistic"
+      },
+      {
+        "es": "ser amable",
+        "en": "to be kind, nice"
+      },
+      {
+        "es": "ser egoísta",
+        "en": "to be selfish"
+      },
+      {
+        "es": "ser molesto(a)",
+        "en": "to be annoying"
+      },
+      {
+        "es": "ser tímido(a) / calmado(a)",
+        "en": "to be shy / calm"
+      },
+      {
+        "es": "ser gracioso(a)",
+        "en": "to be funny"
+      },
+      {
+        "es": "ser dinámico(a)",
+        "en": "to be dynamic"
+      },
+      {
+        "es": "ser generoso(a)",
+        "en": "to be generous"
+      },
+      {
+        "es": "ser sensible",
+        "en": "to be sensitive"
+      },
+      {
+        "es": "ser responsable",
+        "en": "to be responsible"
+      },
+      {
+        "es": "ser concienzudo(a)",
+        "en": "to be conscientious"
+      },
+      {
+        "es": "ser perezoso(a)",
+        "en": "to be lazy"
+      },
+      {
+        "es": "ser curioso(a)",
+        "en": "to be inquisitive"
+      },
+      {
+        "es": "ser trabajador(a)",
+        "en": "to be hard-working"
+      },
+      {
+        "es": "ser celoso(a)",
+        "en": "to be jealous"
+      },
+      {
+        "es": "ser terco(a)",
+        "en": "to be stubborn"
+      },
+      {
+        "es": "ser ingenuo(a)",
+        "en": "to be naive, gullible"
+      },
+      {
+        "es": "ser comprensivo(a)",
+        "en": "to be understanding"
+      },
+      {
+        "es": "tener buen/mal carácter",
+        "en": "to be good/bad tempered"
+      },
+      {
+        "es": "tener buen sentido del humor",
+        "en": "to have a good sense of humour"
+      },
+      {
+        "es": "mostrar celos",
+        "en": "to show jealousy"
+      },
+      {
+        "es": "tener sentido común",
+        "en": "to have common sense"
+      },
+      {
+        "es": "inspirar confianza / respeto",
+        "en": "to inspire confidence / respect"
+      },
+      {
+        "es": "mostrar alegría por vivir",
+        "en": "to come across as very happy"
       }
     ]
   },
   {
-    "chapter": "1B",
+    "chapter": "B",
     "title": "Relaciones personales",
     "words": [
       {
@@ -36,11 +288,79 @@
       {
         "es": "un padre / un padrastro / un suegro",
         "en": "father / stepfather / father-in-law"
+      },
+      {
+        "es": "un hermano / un hermanastro / un cuñado",
+        "en": "brother / stepbrother / brother-in-law"
+      },
+      {
+        "es": "una hermana / una hermanastra / una cuñada",
+        "en": "sister / stepsister / sister-in-law"
+      },
+      {
+        "es": "un hijo / un hijastro / un yerno",
+        "en": "son / stepson / son-in-law"
+      },
+      {
+        "es": "una hija / una hijastra / una nuera",
+        "en": "daughter / stepdaughter / daughter-in-law"
+      },
+      {
+        "es": "un abuelo / un bisabuelo",
+        "en": "grandfather / great-grandfather"
+      },
+      {
+        "es": "una abuela / una bisabuela",
+        "en": "grandmother / great-grandmother"
+      },
+      {
+        "es": "un nieto / una nieta",
+        "en": "grandson / granddaughter"
+      },
+      {
+        "es": "un tío / una tía",
+        "en": "uncle / aunt"
+      },
+      {
+        "es": "un primo / una prima",
+        "en": "cousin"
+      },
+      {
+        "es": "un sobrino / una sobrina",
+        "en": "nephew / niece"
+      },
+      {
+        "es": "un ahijado / una ahijada",
+        "en": "godson / goddaughter"
+      },
+      {
+        "es": "una pareja / un novio / una novia",
+        "en": "partner / boyfriend / girlfriend"
+      },
+      {
+        "es": "un esposo / una esposa",
+        "en": "husband / wife"
+      },
+      {
+        "es": "un amigo íntimo / una amiga íntima",
+        "en": "close friend"
+      },
+      {
+        "es": "un compañero / una compañera",
+        "en": "mate / peer / colleague"
+      },
+      {
+        "es": "un conocido / una conocida",
+        "en": "acquaintance"
+      },
+      {
+        "es": "un vecino / una vecina",
+        "en": "neighbour"
       }
     ]
   },
   {
-    "chapter": "1C",
+    "chapter": "C",
     "title": "Comidas y bebidas",
     "words": [
       {
@@ -50,11 +370,99 @@
       {
         "es": "el almuerzo",
         "en": "lunch"
+      },
+      {
+        "es": "la cena",
+        "en": "dinner"
+      },
+      {
+        "es": "la merienda",
+        "en": "snack"
+      },
+      {
+        "es": "la bebida",
+        "en": "drink"
+      },
+      {
+        "es": "el agua con gas / sin gas",
+        "en": "sparkling / still water"
+      },
+      {
+        "es": "el café con leche",
+        "en": "coffee with milk"
+      },
+      {
+        "es": "el té / la infusión",
+        "en": "tea / herbal tea"
+      },
+      {
+        "es": "el zumo / el jugo de naranja",
+        "en": "orange juice"
+      },
+      {
+        "es": "la leche",
+        "en": "milk"
+      },
+      {
+        "es": "el pan",
+        "en": "bread"
+      },
+      {
+        "es": "la mantequilla",
+        "en": "butter"
+      },
+      {
+        "es": "el queso",
+        "en": "cheese"
+      },
+      {
+        "es": "el jamón",
+        "en": "ham"
+      },
+      {
+        "es": "el huevo",
+        "en": "egg"
+      },
+      {
+        "es": "el pollo",
+        "en": "chicken"
+      },
+      {
+        "es": "la carne de res",
+        "en": "beef"
+      },
+      {
+        "es": "el pescado",
+        "en": "fish"
+      },
+      {
+        "es": "las verduras",
+        "en": "vegetables"
+      },
+      {
+        "es": "la fruta",
+        "en": "fruit"
+      },
+      {
+        "es": "la manzana / la pera / la uva",
+        "en": "apple / pear / grape"
+      },
+      {
+        "es": "la ensalada",
+        "en": "salad"
+      },
+      {
+        "es": "el postre",
+        "en": "dessert"
+      },
+      {
+        "es": "el helado",
+        "en": "ice cream"
       }
     ]
   },
   {
-    "chapter": "1D",
+    "chapter": "D",
     "title": "El bienestar físico",
     "words": [
       {
@@ -64,6 +472,82 @@
       {
         "es": "estar enfermo(a) / enfermarse",
         "en": "to be/become ill"
+      },
+      {
+        "es": "toser / estornudar",
+        "en": "to cough / to sneeze"
+      },
+      {
+        "es": "tener fiebre",
+        "en": "to have a fever"
+      },
+      {
+        "es": "tener dolor de cabeza / estómago",
+        "en": "to have a headache / stomach ache"
+      },
+      {
+        "es": "tener una gripe / un resfriado",
+        "en": "to have the flu / a cold"
+      },
+      {
+        "es": "sentirse cansado(a)",
+        "en": "to feel tired"
+      },
+      {
+        "es": "estar mareado(a)",
+        "en": "to feel dizzy"
+      },
+      {
+        "es": "guardar cama",
+        "en": "to stay in bed (illness)"
+      },
+      {
+        "es": "recuperarse / reponerse",
+        "en": "to recover"
+      },
+      {
+        "es": "hacer ejercicio / entrenarse",
+        "en": "to exercise / to train"
+      },
+      {
+        "es": "mantenerse en forma",
+        "en": "to stay in shape"
+      },
+      {
+        "es": "llevar una vida sana",
+        "en": "to lead a healthy life"
+      },
+      {
+        "es": "cuidar la alimentación",
+        "en": "to watch your diet"
+      },
+      {
+        "es": "estar a dieta / hacer régimen",
+        "en": "to be on a diet"
+      },
+      {
+        "es": "fumar / dejar de fumar",
+        "en": "to smoke / to quit smoking"
+      },
+      {
+        "es": "el médico / la médica",
+        "en": "doctor"
+      },
+      {
+        "es": "el enfermero / la enfermera",
+        "en": "nurse"
+      },
+      {
+        "es": "el hospital / la clínica",
+        "en": "hospital / clinic"
+      },
+      {
+        "es": "la farmacia",
+        "en": "pharmacy"
+      },
+      {
+        "es": "la medicina / el medicamento",
+        "en": "medicine / medication"
       }
     ]
   }
