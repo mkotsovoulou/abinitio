@@ -2,11 +2,19 @@
   {
     "chapter": "1A",
     "title": "Características personales",
-    "totalWords": 99,
+    "totalWords": 123,
     "words": [
       {
         "es": "el apellido",
-        "en": "surname / family name"
+        "en": "surname"
+      },
+      {
+        "es": "el apellido",
+        "en": "last name"
+      },
+      {
+        "es": "el apellido",
+        "en": "family name"
       },
       {
         "es": "el primer nombre",
@@ -17,7 +25,11 @@
         "en": "middle name"
       },
       {
-        "es": "el seudónimo / el apodo",
+        "es": "el seudónimo",
+        "en": "nickname"
+      },
+      {
+        "es": "el apodo",
         "en": "nickname"
       },
       {
@@ -45,36 +57,100 @@
         "en": "home address"
       },
       {
-        "es": "la lengua (materna)",
-        "en": "(mother) tongue / language"
+        "es": "la lengua materna",
+        "en": "mother tongue"
+      },
+      {
+        "es": "la lengua",
+        "en": "language"
       },
       {
         "es": "tener x años",
         "en": "to be x years old"
       },
       {
-        "es": "vivir en un pueblo / una ciudad",
-        "en": "to live in a village / a city"
+        "es": "vivir en un pueblo",
+        "en": "to live in a village"
+      },
+      {
+        "es": "vivir en una ciudad",
+        "en": "to live in a city"
       },
       {
         "es": "ser de nacionalidad británica",
         "en": "to be of British nationality"
       },
       {
-        "es": "tener origen español / argentino",
-        "en": "to be of Spanish / Argentinian origin"
+        "es": "tener origen español",
+        "en": "to be of Spanish origin"
       },
       {
-        "es": "sentirse español(a) / argentino(a)",
-        "en": "to feel Spanish / Argentinian"
+        "es": "tener origen argentino",
+        "en": "to be of Argentinian origin"
+      },
+      {
+        "es": "ser originario de España",
+        "en": "to be from Spain"
+      },
+      {
+        "es": "ser originario de Argentina",
+        "en": "to be from Argentina"
+      },
+      {
+        "es": "sentirse español",
+        "en": "to feel Spanish"
+      },
+      {
+        "es": "sentirse argentino",
+        "en": "to feel Argentinian"
       },
       {
         "es": "tener doble nacionalidad",
         "en": "to have dual nationality"
       },
       {
+        "es": "hablar inglés",
+        "en": "to speak English"
+      },
+      {
         "es": "hablar inglés fluidamente",
         "en": "to speak English fluently"
+      },
+      {
+        "es": "estar en los treinta",
+        "en": "to be in his thirties"
+      },
+      {
+        "es": "Soy inglés",
+        "en": "I am English"
+      },
+      {
+        "es": "Soy chino",
+        "en": "I am Chinese"
+      },
+      {
+        "es": "Soy americano",
+        "en": "I am American"
+      },
+      {
+        "es": "Vivo aquí desde los 12 años",
+        "en": "I’ve been living here since I was 12"
+      },
+      {
+        "es": "Mis padres viven en Dubái desde 2016",
+        "en": "My parents have lived in Dubai since 2016"
+      },
+      {
+        "es": "Hablo inglés desde los 10 años",
+        "en": "I’ve spoken English since I was 10"
+      },
+      {
+        "es": "Soy bilingüe",
+        "en": "I’m bilingual"
+      },
+      {
+        "es": "No aparenta su edad",
+        "en": "He doesn’t look his age"
       },
       {
         "es": "estar en la edad del pavo",
@@ -85,7 +161,11 @@
         "en": "physical appearance"
       },
       {
-        "es": "la silueta / la figura",
+        "es": "la silueta",
+        "en": "figure"
+      },
+      {
+        "es": "la figura",
         "en": "figure"
       },
       {
@@ -93,19 +173,31 @@
         "en": "body"
       },
       {
-        "es": "la cara / el rostro",
+        "es": "la cara",
         "en": "face"
       },
       {
-        "es": "la ropa / el atuendo",
-        "en": "clothes / clothing"
+        "es": "el rostro",
+        "en": "face"
       },
       {
-        "es": "ser pequeño(a) / bajo(a)",
-        "en": "to be small / short"
+        "es": "la ropa",
+        "en": "clothes"
       },
       {
-        "es": "ser alto(a)",
+        "es": "el atuendo",
+        "en": "clothing"
+      },
+      {
+        "es": "ser pequeño",
+        "en": "to be small"
+      },
+      {
+        "es": "ser bajo",
+        "en": "to be short"
+      },
+      {
+        "es": "ser alto",
         "en": "to be tall"
       },
       {
@@ -113,12 +205,24 @@
         "en": "of average height"
       },
       {
-        "es": "ser delgado(a) / flaco(a)",
-        "en": "to be slim / thin"
+        "es": "ser delgado",
+        "en": "to be slim"
       },
       {
-        "es": "ser fuerte / corpulento(a) / fornido(a)",
-        "en": "to be thick set / stout / chunky"
+        "es": "ser flaco",
+        "en": "to be thin"
+      },
+      {
+        "es": "ser fuerte",
+        "en": "to be strong"
+      },
+      {
+        "es": "ser corpulento",
+        "en": "to be stout"
+      },
+      {
+        "es": "ser fornido",
+        "en": "to be chunky"
       },
       {
         "es": "tener los ojos azules",
@@ -137,7 +241,7 @@
         "en": "to have hazel eyes"
       },
       {
-        "es": "tener los los ojos grises",
+        "es": "tener los ojos grises",
         "en": "to have grey eyes"
       },
       {
@@ -189,7 +293,7 @@
         "en": "to have afro hair"
       },
       {
-        "es": "ser calvo(a)",
+        "es": "ser calvo",
         "en": "to be bald"
       },
       {
@@ -221,16 +325,24 @@
         "en": "to have wrinkles"
       },
       {
-        "es": "tener granos (acné)",
-        "en": "to have pimples (acne)"
+        "es": "tener granos",
+        "en": "to have pimples"
+      },
+      {
+        "es": "tener acné",
+        "en": "to have acne"
       },
       {
         "es": "tener una cicatriz",
         "en": "to have a scar"
       },
       {
-        "es": "usar anteojos / lentes de contacto",
-        "en": "to wear glasses / contacts"
+        "es": "usar anteojos",
+        "en": "to wear glasses"
+      },
+      {
+        "es": "usar lentes de contacto",
+        "en": "to wear contact lenses"
       },
       {
         "es": "usar aparatos",
@@ -289,7 +401,7 @@
         "en": "to wear eccentric clothes"
       },
       {
-        "es": "ser simpático(a)",
+        "es": "ser simpático",
         "en": "to be friendly"
       },
       {
@@ -302,34 +414,34 @@
       },
       {
         "es": "ser amable",
-        "en": "to be kind, nice"
+        "en": "to be kind"
       },
       {
         "es": "ser egoísta",
         "en": "to be selfish"
       },
       {
-        "es": "ser molesto(a)",
+        "es": "ser molesto",
         "en": "to be annoying"
       },
       {
-        "es": "ser tímido(a)",
+        "es": "ser tímido",
         "en": "to be shy"
       },
       {
-        "es": "ser calmado(a)",
+        "es": "ser calmado",
         "en": "to be calm"
       },
       {
-        "es": "ser gracioso(a)",
+        "es": "ser gracioso",
         "en": "to be funny"
       },
       {
-        "es": "ser dinámico(a)",
+        "es": "ser dinámico",
         "en": "to be dynamic"
       },
       {
-        "es": "ser generoso(a)",
+        "es": "ser generoso",
         "en": "to be generous"
       },
       {
@@ -341,40 +453,44 @@
         "en": "to be responsible"
       },
       {
-        "es": "ser concienzudo(a)",
+        "es": "ser concienzudo",
         "en": "to be conscientious"
       },
       {
-        "es": "ser perezoso(a)",
+        "es": "ser perezoso",
         "en": "to be lazy"
       },
       {
-        "es": "ser curioso(a)",
+        "es": "ser curioso",
         "en": "to be inquisitive"
       },
       {
-        "es": "ser trabajador(a)",
+        "es": "ser trabajador",
         "en": "to be hard-working"
       },
       {
-        "es": "ser celoso(a)",
+        "es": "ser celoso",
         "en": "to be jealous"
       },
       {
-        "es": "ser terco(a)",
+        "es": "ser terco",
         "en": "to be stubborn"
       },
       {
-        "es": "ser ingenuo(a)",
-        "en": "to be naive, gullible"
+        "es": "ser ingenuo",
+        "en": "to be naive"
       },
       {
-        "es": "ser comprensivo(a)",
+        "es": "ser comprensivo",
         "en": "to be understanding"
       },
       {
-        "es": "tener buen/mal carácter",
-        "en": "to be good/bad tempered"
+        "es": "tener buen carácter",
+        "en": "to be good-tempered"
+      },
+      {
+        "es": "tener mal carácter",
+        "en": "to be bad-tempered"
       },
       {
         "es": "tener buen sentido del humor",
@@ -405,82 +521,186 @@
   {
     "chapter": "1B",
     "title": "Relaciones personales",
-    "totalWords": 29,
+    "totalWords": 46,
     "words": [
       {
-        "es": "una madre / una madrastra / una suegra",
-        "en": "mother / stepmother / mother-in-law"
+        "es": "una madre",
+        "en": "mother"
       },
       {
-        "es": "un padre / un padrastro / un suegro",
-        "en": "father / stepfather / father-in-law"
+        "es": "una madrastra",
+        "en": "stepmother"
       },
       {
-        "es": "un hermano / un hermanastro / un cuñado",
-        "en": "brother / stepbrother / brother-in-law"
+        "es": "una suegra",
+        "en": "mother-in-law"
       },
       {
-        "es": "una hermana / una hermanastra / una cuñada",
-        "en": "sister / stepsister / sister-in-law"
+        "es": "un padre",
+        "en": "father"
       },
       {
-        "es": "un hijo / un hijastro / un yerno",
-        "en": "son / stepson / son-in-law"
+        "es": "un padrastro",
+        "en": "stepfather"
       },
       {
-        "es": "una hija / una hijastra / una nuera",
-        "en": "daughter / stepdaughter / daughter-in-law"
+        "es": "un suegro",
+        "en": "father-in-law"
       },
       {
-        "es": "un abuelo / un bisabuelo",
-        "en": "grandfather / great-grandfather"
+        "es": "un hermano",
+        "en": "brother"
       },
       {
-        "es": "una abuela / una bisabuela",
-        "en": "grandmother / great-grandmother"
+        "es": "un hermanastro",
+        "en": "stepbrother"
       },
       {
-        "es": "un nieto / una nieta",
-        "en": "grandson / granddaughter"
+        "es": "un cuñado",
+        "en": "brother-in-law"
       },
       {
-        "es": "un tío / una tía",
-        "en": "uncle / aunt"
+        "es": "una hermana",
+        "en": "sister"
       },
       {
-        "es": "un primo / una prima",
+        "es": "una hermanastra",
+        "en": "stepsister"
+      },
+      {
+        "es": "una cuñada",
+        "en": "sister-in-law"
+      },
+      {
+        "es": "un hijo",
+        "en": "son"
+      },
+      {
+        "es": "un hijastro",
+        "en": "stepson"
+      },
+      {
+        "es": "un yerno",
+        "en": "son-in-law"
+      },
+      {
+        "es": "una hija",
+        "en": "daughter"
+      },
+      {
+        "es": "una hijastra",
+        "en": "stepdaughter"
+      },
+      {
+        "es": "una nuera",
+        "en": "daughter-in-law"
+      },
+      {
+        "es": "un abuelo",
+        "en": "grandfather"
+      },
+      {
+        "es": "un bisabuelo",
+        "en": "great-grandfather"
+      },
+      {
+        "es": "una abuela",
+        "en": "grandmother"
+      },
+      {
+        "es": "una bisabuela",
+        "en": "great-grandmother"
+      },
+      {
+        "es": "un nieto",
+        "en": "grandson"
+      },
+      {
+        "es": "una nieta",
+        "en": "granddaughter"
+      },
+      {
+        "es": "un tío",
+        "en": "uncle"
+      },
+      {
+        "es": "una tía",
+        "en": "aunt"
+      },
+      {
+        "es": "un primo",
         "en": "cousin"
       },
       {
-        "es": "un sobrino / una sobrina",
-        "en": "nephew / niece"
+        "es": "una prima",
+        "en": "cousin"
       },
       {
-        "es": "un ahijado / una ahijada",
-        "en": "godson / goddaughter"
+        "es": "un sobrino",
+        "en": "nephew"
       },
       {
-        "es": "una pareja / un novio / una novia",
-        "en": "partner / boyfriend / girlfriend"
+        "es": "una sobrina",
+        "en": "niece"
       },
       {
-        "es": "un esposo / una esposa",
-        "en": "husband / wife"
+        "es": "un ahijado",
+        "en": "godson"
       },
       {
-        "es": "un amigo íntimo / una amiga íntima",
+        "es": "una ahijada",
+        "en": "goddaughter"
+      },
+      {
+        "es": "una pareja",
+        "en": "partner"
+      },
+      {
+        "es": "un novio",
+        "en": "boyfriend"
+      },
+      {
+        "es": "una novia",
+        "en": "girlfriend"
+      },
+      {
+        "es": "un esposo",
+        "en": "husband"
+      },
+      {
+        "es": "una esposa",
+        "en": "wife"
+      },
+      {
+        "es": "un amigo íntimo",
         "en": "close friend"
       },
       {
-        "es": "un compañero / una compañera",
+        "es": "una amiga íntima",
+        "en": "close friend"
+      },
+      {
+        "es": "un compañero",
         "en": "mate / peer / colleague"
       },
       {
-        "es": "un conocido / una conocida",
+        "es": "una compañera",
+        "en": "mate / peer / colleague"
+      },
+      {
+        "es": "un conocido",
         "en": "acquaintance"
       },
       {
-        "es": "un vecino / una vecina",
+        "es": "una conocida",
+        "en": "acquaintance"
+      },
+      {
+        "es": "un vecino",
+        "en": "neighbour"
+      },
+      {
+        "es": "una vecina",
         "en": "neighbour"
       },
       {
@@ -500,15 +720,27 @@
         "en": "to be jealous (of)"
       },
       {
-        "es": "discutir / pelearse (con)",
-        "en": "to argue / to fight (with)"
+        "es": "discutir",
+        "en": "to argue"
       },
       {
-        "es": "separarse / divorciarse",
-        "en": "to separate / to divorce"
+        "es": "pelearse (con)",
+        "en": "to fight (with)"
       },
       {
-        "es": "coquetear / flirtear",
+        "es": "separarse",
+        "en": "to separate"
+      },
+      {
+        "es": "divorciarse",
+        "en": "to divorce"
+      },
+      {
+        "es": "coquetear",
+        "en": "to flirt"
+      },
+      {
+        "es": "flirtear",
         "en": "to flirt"
       },
       {
@@ -520,15 +752,19 @@
         "en": "to go out with someone"
       },
       {
-        "es": "comprometerse / casarse",
-        "en": "to get engaged / to get married"
+        "es": "comprometerse",
+        "en": "to get engaged"
+      },
+      {
+        "es": "casarse",
+        "en": "to get married"
       }
     ]
   },
   {
     "chapter": "1C",
     "title": "Comidas y bebidas",
-    "totalWords": 34,
+    "totalWords": 55,
     "words": [
       {
         "es": "el desayuno",
@@ -559,80 +795,192 @@
         "en": "dessert"
       },
       {
-        "es": "un trago / una bebida",
+        "es": "un trago",
         "en": "a drink"
       },
       {
-        "es": "especialidad regional / nacional",
-        "en": "regional / national specialty"
+        "es": "una bebida",
+        "en": "a drink"
       },
       {
-        "es": "tener hambre / tener sed",
-        "en": "to be hungry / to be thirsty"
+        "es": "especialidad regional",
+        "en": "regional specialty"
       },
       {
-        "es": "cocinar / preparar la comida",
-        "en": "to cook / to prepare the meal"
+        "es": "especialidad nacional",
+        "en": "national specialty"
       },
       {
-        "es": "restaurante / cafetería / café / bar",
-        "en": "restaurant / cafeteria / café / bar"
+        "es": "tener hambre",
+        "en": "to be hungry"
+      },
+      {
+        "es": "tener sed",
+        "en": "to be thirsty"
+      },
+      {
+        "es": "cocinar",
+        "en": "to cook"
+      },
+      {
+        "es": "preparar la comida",
+        "en": "to prepare the meal"
+      },
+      {
+        "es": "restaurante",
+        "en": "restaurant"
+      },
+      {
+        "es": "cafetería",
+        "en": "cafeteria"
+      },
+      {
+        "es": "café",
+        "en": "café"
+      },
+      {
+        "es": "bar",
+        "en": "bar"
       },
       {
         "es": "comida para llevar",
-        "en": "takeout / takeaway"
+        "en": "takeout"
+      },
+      {
+        "es": "comida para llevar",
+        "en": "takeaway"
       },
       {
         "es": "pedido a domicilio",
         "en": "home delivery"
       },
       {
-        "es": "comida rápida / comida chatarra",
-        "en": "fast food / junk food"
+        "es": "comida rápida",
+        "en": "fast food"
       },
       {
-        "es": "refrescos / bebidas gaseosas",
-        "en": "soft drinks / fizzy drinks"
+        "es": "comida chatarra",
+        "en": "junk food"
       },
       {
-        "es": "dulces / salados",
-        "en": "sweet / savoury"
+        "es": "refrescos",
+        "en": "soft drinks"
       },
       {
-        "es": "mercado / supermercado / hipermercado",
-        "en": "market / supermarket / hypermarket"
+        "es": "bebidas gaseosas",
+        "en": "fizzy drinks"
       },
       {
-        "es": "panadería / carnicería / pescadería / verdulería",
-        "en": "bakery / butcher’s / fishmonger’s / greengrocer’s"
+        "es": "dulces",
+        "en": "sweet"
       },
       {
-        "es": "quesería / delicatessen",
-        "en": "cheese shop / delicatessen"
+        "es": "salados",
+        "en": "savoury"
       },
       {
-        "es": "100 gramos / una libra / un kilo de",
-        "en": "100 grams / a pound / a kilo of"
+        "es": "mercado",
+        "en": "market"
       },
       {
-        "es": "(medio) litro / botella / lata / vaso de",
-        "en": "(half) litre / bottle / can / glass of"
+        "es": "supermercado",
+        "en": "supermarket"
       },
       {
-        "es": "caja / paquete / bol de",
-        "en": "box / packet / bowl of"
+        "es": "hipermercado",
+        "en": "hypermarket"
       },
       {
-        "es": "frasco / jarra de",
-        "en": "jar / jug of"
+        "es": "panadería",
+        "en": "bakery"
       },
       {
-        "es": "pedazo / porción de",
-        "en": "piece / portion of"
+        "es": "carnicería",
+        "en": "butcher’s"
       },
       {
-        "es": "cucharadita / cucharada de",
-        "en": "teaspoon / tablespoon of"
+        "es": "pescadería",
+        "en": "fishmonger’s"
+      },
+      {
+        "es": "verdulería",
+        "en": "greengrocer’s"
+      },
+      {
+        "es": "quesería",
+        "en": "cheese shop"
+      },
+      {
+        "es": "delicatessen",
+        "en": "delicatessen"
+      },
+      {
+        "es": "100 gramos de",
+        "en": "100 grams of"
+      },
+      {
+        "es": "una libra de",
+        "en": "a pound of"
+      },
+      {
+        "es": "un kilo de",
+        "en": "a kilo of"
+      },
+      {
+        "es": "medio litro de",
+        "en": "half litre of"
+      },
+      {
+        "es": "litro de",
+        "en": "litre of"
+      },
+      {
+        "es": "botella de",
+        "en": "bottle of"
+      },
+      {
+        "es": "lata de",
+        "en": "can of"
+      },
+      {
+        "es": "vaso de",
+        "en": "glass of"
+      },
+      {
+        "es": "caja de",
+        "en": "box of"
+      },
+      {
+        "es": "paquete de",
+        "en": "packet of"
+      },
+      {
+        "es": "bol de",
+        "en": "bowl of"
+      },
+      {
+        "es": "frasco de",
+        "en": "jar of"
+      },
+      {
+        "es": "jarra de",
+        "en": "jug of"
+      },
+      {
+        "es": "pedazo de",
+        "en": "piece of"
+      },
+      {
+        "es": "porción de",
+        "en": "portion of"
+      },
+      {
+        "es": "cucharadita de",
+        "en": "teaspoon of"
+      },
+      {
+        "es": "cucharada de",
+        "en": "tablespoon of"
       },
       {
         "es": "productos frescos",
@@ -671,55 +1019,111 @@
   {
     "chapter": "1D",
     "title": "El bienestar físico",
-    "totalWords": 32,
+    "totalWords": 55,
     "words": [
       {
-        "es": "estar mal de salud / tener mala salud",
+        "es": "estar mal de salud",
         "en": "to be in poor health"
       },
       {
-        "es": "estar enfermo(a) / enfermarse",
-        "en": "to be / to become ill"
+        "es": "tener mala salud",
+        "en": "to be in poor health"
       },
       {
-        "es": "toser / estornudar",
-        "en": "to cough / to sneeze"
+        "es": "estar enfermo(a)",
+        "en": "to be ill"
+      },
+      {
+        "es": "enfermarse",
+        "en": "to become ill"
+      },
+      {
+        "es": "toser",
+        "en": "to cough"
+      },
+      {
+        "es": "estornudar",
+        "en": "to sneeze"
       },
       {
         "es": "tener fiebre",
         "en": "to have a fever"
       },
       {
-        "es": "tener dolor de cabeza / garganta / pecho",
-        "en": "to have a headache / sore throat / chest pains"
+        "es": "tener dolor de cabeza",
+        "en": "to have a headache"
       },
       {
-        "es": "dolor de espalda / dolor de estómago",
-        "en": "backache / stomachache"
+        "es": "tener dolor de garganta",
+        "en": "to have a sore throat"
       },
       {
-        "es": "dolor de muelas / dolor de oídos / dolor de ojos",
-        "en": "toothache / earache / sore eyes"
+        "es": "tener dolor de pecho",
+        "en": "to have chest pains"
       },
       {
-        "es": "estar resfriado(a) / estar cansado(a)",
-        "en": "to have a cold / to be tired"
+        "es": "dolor de espalda",
+        "en": "backache"
+      },
+      {
+        "es": "dolor de estómago",
+        "en": "stomachache"
+      },
+      {
+        "es": "dolor de muelas",
+        "en": "toothache"
+      },
+      {
+        "es": "dolor de oídos",
+        "en": "earache"
+      },
+      {
+        "es": "dolor de ojos",
+        "en": "sore eyes"
+      },
+      {
+        "es": "estar resfriado(a)",
+        "en": "to have a cold"
+      },
+      {
+        "es": "estar cansado(a)",
+        "en": "to be tired"
       },
       {
         "es": "ser alérgico(a) a",
         "en": "to be allergic to"
       },
       {
-        "es": "sufrir de problemas respiratorios / cardiacos",
-        "en": "to suffer from respiratory / cardiac problems"
+        "es": "sufrir de problemas respiratorios",
+        "en": "to suffer from respiratory problems"
       },
       {
-        "es": "síntomas de gripe / gastroenteritis / COVID-19",
-        "en": "symptoms of influenza / gastroenteritis / COVID-19"
+        "es": "sufrir de problemas cardiacos",
+        "en": "to suffer from cardiac problems"
       },
       {
-        "es": "ir a la farmacia / al médico / al hospital",
-        "en": "to go to the pharmacy / the doctor’s / the hospital"
+        "es": "síntomas de gripe",
+        "en": "symptoms of influenza"
+      },
+      {
+        "es": "síntomas de gastroenteritis",
+        "en": "symptoms of gastroenteritis"
+      },
+      {
+        "es": "síntomas de COVID-19",
+        "en": "symptoms of COVID-19"
+      },
+      {
+        "es": "ir a la farmacia",
+        "en": "to go to the pharmacy"
+      },
+      {
+        "es": "ir al médico",
+        "en": "to go to the doctor’s"
+      },
+      {
+        "es": "ir al hospital",
+        "en": "to go to the hospital"
       },
       {
         "es": "consultar a un médico",
@@ -730,20 +1134,40 @@
         "en": "not to be in good shape"
       },
       {
-        "es": "sentirse bien / mal",
-        "en": "to feel well / unwell"
+        "es": "sentirse bien",
+        "en": "to feel well"
       },
       {
-        "es": "tener una migraña / fiebre / asma",
-        "en": "to have a migraine / fever / asthma"
+        "es": "sentirse mal",
+        "en": "to feel unwell"
       },
       {
-        "es": "tener náuseas / dolor por todas partes",
-        "en": "to feel nauseous / to ache all over"
+        "es": "tener una migraña",
+        "en": "to have a migraine"
       },
       {
-        "es": "tener una alergia / una reacción alérgica a",
-        "en": "to have an allergy / an allergic reaction to"
+        "es": "tener fiebre",
+        "en": "to have a fever"
+      },
+      {
+        "es": "tener asma",
+        "en": "to have asthma"
+      },
+      {
+        "es": "tener náuseas",
+        "en": "to feel nauseous"
+      },
+      {
+        "es": "tener dolor por todas partes",
+        "en": "to ache all over"
+      },
+      {
+        "es": "tener una alergia",
+        "en": "to have an allergy"
+      },
+      {
+        "es": "tener una reacción alérgica a",
+        "en": "to have an allergic reaction to"
       },
       {
         "es": "estar mareado(a)",
@@ -754,12 +1178,20 @@
         "en": "to stay in bed (illness)"
       },
       {
-        "es": "recuperarse / reponerse",
+        "es": "recuperarse",
         "en": "to recover"
       },
       {
-        "es": "hacer ejercicio / entrenarse",
-        "en": "to exercise / to train"
+        "es": "reponerse",
+        "en": "to recover"
+      },
+      {
+        "es": "hacer ejercicio",
+        "en": "to exercise"
+      },
+      {
+        "es": "entrenarse",
+        "en": "to train"
       },
       {
         "es": "mantenerse en forma",
@@ -774,47 +1206,56 @@
         "en": "to watch your diet"
       },
       {
-        "es": "estar a dieta / hacer régimen",
+        "es": "estar a dieta",
         "en": "to be on a diet"
       },
       {
-        "es": "fumar / dejar de fumar",
-        "en": "to smoke / to quit smoking"
+        "es": "hacer régimen",
+        "en": "to be on a diet"
       },
       {
-        "es": "el médico / la médica",
+        "es": "fumar",
+        "en": "to smoke"
+      },
+      {
+        "es": "dejar de fumar",
+        "en": "to quit smoking"
+      },
+      {
+        "es": "el médico",
         "en": "doctor"
       },
       {
-        "es": "el enfermero / la enfermera",
+        "es": "la médica",
+        "en": "doctor"
+      },
+      {
+        "es": "el enfermero",
         "en": "nurse"
       },
       {
-        "es": "el hospital / la clínica",
-        "en": "hospital / clinic"
+        "es": "la enfermera",
+        "en": "nurse"
+      },
+      {
+        "es": "el hospital",
+        "en": "hospital"
+      },
+      {
+        "es": "la clínica",
+        "en": "clinic"
       },
       {
         "es": "la farmacia",
         "en": "pharmacy"
       },
       {
-        "es": "la medicina / el medicamento",
-        "en": "medicine / medication"
-      }
-    ]
-  },
-  {
-    "chapter": "1E",
-    "title": "Template - Add Your Own",
-    "totalWords": 2,
-    "words": [
-      {
-        "es": "palabra",
-        "en": "word"
+        "es": "la medicina",
+        "en": "medicine"
       },
       {
-        "es": "ejemplo",
-        "en": "example"
+        "es": "el medicamento",
+        "en": "medication"
       }
     ]
   }
