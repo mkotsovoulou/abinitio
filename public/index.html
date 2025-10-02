@@ -78,25 +78,24 @@
 <body>
   <!-- Setup -->
   <section id="setup" class="panel active">
-    <h2>Spanish Flashcards Trainer</h2>
-    <div class="stack">
+    <h2>Spanish Flashcards</h2>
+    <div class="row">
       <div>
-        <label for="chapterSelect">Choose a chapter</label>
-        <select id="chapterSelect"></select>
+        <label for="chapterSelect">Chapter</label>
+        <select id="chapterSelect">
+          <option value="">Select a chapter…</option>
+        </select>
       </div>
-      <div class="row">
-        <div>
-          <label for="wordCount">How many words?</label>
-          <input type="number" id="wordCount" min="1" value="10" />
-        </div>
-        <div class="center" style="align-self:end;">
-          <button id="startBtn" class="btn btn-primary">Start</button>
-        </div>
+      <div>
+        <label for="wordCount">Number of words</label>
+        <input type="number" id="wordCount" min="1" value="10" />
       </div>
     </div>
-  </section>
-
-  <!-- Flashcard -->
+    <div style="display: flex; gap: 12px; margin-top: 16px;">
+      <button id="startBtn" class="btn btn-primary">Start Session</button>
+      <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">View Progress Log</button>
+    </div>
+  </section>  <!-- Flashcard -->
   <section id="flashcard" class="panel">
     <div id="progress"></div>
     <div id="card" class="center">Loading…</div>
@@ -115,12 +114,22 @@
     <button id="restartBtn" class="btn btn-primary">Restart</button>
   </section>
 
+  <!-- Logs -->
+  <section id="logs" class="panel">
+    <h2>Progress Log 📊</h2>
+    <div id="logsContainer">
+      <p>Loading logs...</p>
+    </div>
+    <button id="backToSetupBtn" class="btn">Back to Setup</button>
+  </section>
+
 <script>
 let chapters = [];
 let sessionCards = [];
 let currentIndex = 0;
 let score = 0;
 let revealed = false;
+let currentChapter = null;
 
 function $(id){ return document.getElementById(id); }
 
@@ -139,6 +148,7 @@ async function loadFlashcards() {
 function startSession(){
   const chId = $("chapterSelect").value;
   const selected = chapters.find(c => c.chapter === chId);
+  currentChapter = selected;
   let count = parseInt($("wordCount").value) || 1;
   if(count > selected.words.length) count = selected.words.length;
   sessionCards = shuffle([...selected.words]).slice(0,count);
@@ -148,7 +158,7 @@ function startSession(){
 }
 
 function showPanel(id){
-  ["setup","flashcard","results"].forEach(p=>$(p).classList.remove("active"));
+  ["setup","flashcard","results","logs"].forEach(p=>$(p).classList.remove("active"));
   $(id).classList.add("active");
 }
 
@@ -178,14 +188,106 @@ function handleAnswer(isKnown){
 }
 
 function nextCard(){ currentIndex++; showCard(); }
-function endSession(){ showPanel("results"); $("score").textContent=`You knew ${score} of ${sessionCards.length}`; }
+function endSession(){ 
+  showPanel("results"); 
+  $("score").textContent=`You knew ${score} of ${sessionCards.length}`;
+  // Log the session results
+  saveLogEntry();
+}
+
+async function saveLogEntry() {
+  if (!currentChapter) return;
+  
+  const logData = {
+    chapter: currentChapter.chapter,
+    chapterTitle: currentChapter.title,
+    score: score,
+    totalCards: sessionCards.length
+  };
+  
+  try {
+    const response = await fetch("/api/log", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(logData)
+    });
+    
+    if (response.ok) {
+      console.log("Log entry saved successfully");
+    } else {
+      console.error("Failed to save log entry");
+    }
+  } catch (error) {
+    console.error("Error saving log entry:", error);
+  }
+}
+
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+async function showLogs() {
+  showPanel("logs");
+  try {
+    const response = await fetch("/api/logs");
+    const logs = await response.json();
+    
+    const container = $("logsContainer");
+    if (logs.length === 0) {
+      container.innerHTML = "<p>No session logs yet. Complete a flashcard session to see your progress!</p>";
+      return;
+    }
+    
+    // Sort logs by date and time (newest first)
+    logs.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateB - dateA;
+    });
+    
+    let html = '<div style="overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; margin-top: 16px;">';
+    html += '<thead><tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">';
+    html += '<th style="padding: 12px; text-align: left;">Date</th>';
+    html += '<th style="padding: 12px; text-align: left;">Time</th>';
+    html += '<th style="padding: 12px; text-align: left;">Chapter</th>';
+    html += '<th style="padding: 12px; text-align: center;">Score</th>';
+    html += '<th style="padding: 12px; text-align: center;">Percentage</th>';
+    html += '<th style="padding: 12px; text-align: left;">IP Address</th>';
+    html += '</tr></thead><tbody>';
+    
+    logs.forEach(log => {
+      const percentage = log.percentage || Math.round((log.score / log.totalCards) * 100);
+      const scoreColor = percentage >= 80 ? 'var(--success)' : percentage >= 60 ? '#f59e0b' : 'var(--danger)';
+      
+      const chapterDisplay = log.chapterTitle || `Chapter ${log.chapter}`;
+      const ipDisplay = log.ipAddress || 'Unknown';
+      
+      html += '<tr style="border-bottom: 1px solid #e5e7eb;">';
+      html += `<td style="padding: 12px;">${log.date}</td>`;
+      html += `<td style="padding: 12px;">${log.time}</td>`;
+      html += `<td style="padding: 12px;">${chapterDisplay}</td>`;
+      html += `<td style="padding: 12px; text-align: center;">${log.score}/${log.totalCards}</td>`;
+      html += `<td style="padding: 12px; text-align: center; color: ${scoreColor}; font-weight: 600;">${percentage}%</td>`;
+      html += `<td style="padding: 12px; font-family: monospace; font-size: 14px;">${ipDisplay}</td>`;
+      html += '</tr>';
+    });
+    
+    html += '</tbody></table></div>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error("Error loading logs:", error);
+    $("logsContainer").innerHTML = "<p>Error loading logs. Please try again.</p>";
+  }
+}
 
 $("startBtn").onclick=startSession;
 $("knowBtn").onclick=()=>handleAnswer(true);
 $("dontKnowBtn").onclick=()=>handleAnswer(false);
 $("nextBtn").onclick=nextCard;
 $("restartBtn").onclick=()=>location.reload();
+$("viewLogsBtn").onclick=showLogs;
+$("backToSetupBtn").onclick=()=>showPanel("setup");
 
 loadFlashcards();
 </script>
