@@ -23,7 +23,7 @@ app.get("/api/flashcards", (req, res) => {
 
 // API endpoint to save log entries
 app.post("/api/log", (req, res) => {
-  const { chapter, score, totalCards, chapterTitle } = req.body;
+  const { chapter, score, totalCards, chapterTitle, clientDate, clientTime, clientTimezone } = req.body;
   
   if (!chapter || score === undefined || !totalCards) {
     return res.status(400).json({ error: "Missing required fields: chapter, score, totalCards" });
@@ -38,8 +38,9 @@ app.post("/api/log", (req, res) => {
                    req.ip;
 
   const logEntry = {
-    date: new Date().toISOString().split('T')[0], // YYYY-MM-DD
-    time: new Date().toTimeString().split(' ')[0], // HH:MM:SS
+    date: clientDate || new Date().toISOString().split('T')[0], // Use client date or fallback to server date
+    time: clientTime || new Date().toTimeString().split(' ')[0], // Use client time or fallback to server time
+    timezone: clientTimezone || 'Unknown',
     chapter: chapter,
     chapterTitle: chapterTitle || `Chapter ${chapter}`,
     score: score,

@@ -198,11 +198,20 @@ function endSession(){
 async function saveLogEntry() {
   if (!currentChapter) return;
   
+  // Get client's local date and time
+  const now = new Date();
+  const clientDate = now.toISOString().split('T')[0]; // YYYY-MM-DD
+  const clientTime = now.toTimeString().split(' ')[0]; // HH:MM:SS
+  const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  
   const logData = {
     chapter: currentChapter.chapter,
     chapterTitle: currentChapter.title,
     score: score,
-    totalCards: sessionCards.length
+    totalCards: sessionCards.length,
+    clientDate: clientDate,
+    clientTime: clientTime,
+    clientTimezone: clientTimezone
   };
   
   try {
@@ -249,6 +258,7 @@ async function showLogs() {
     html += '<thead><tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">';
     html += '<th style="padding: 12px; text-align: left;">Date</th>';
     html += '<th style="padding: 12px; text-align: left;">Time</th>';
+    html += '<th style="padding: 12px; text-align: left;">Timezone</th>';
     html += '<th style="padding: 12px; text-align: left;">Chapter</th>';
     html += '<th style="padding: 12px; text-align: center;">Score</th>';
     html += '<th style="padding: 12px; text-align: center;">Percentage</th>';
@@ -261,10 +271,12 @@ async function showLogs() {
       
       const chapterDisplay = log.chapterTitle || `Chapter ${log.chapter}`;
       const ipDisplay = log.ipAddress || 'Unknown';
+      const timezoneDisplay = log.timezone || 'Unknown';
       
       html += '<tr style="border-bottom: 1px solid #e5e7eb;">';
       html += `<td style="padding: 12px;">${log.date}</td>`;
       html += `<td style="padding: 12px;">${log.time}</td>`;
+      html += `<td style="padding: 12px; font-size: 12px; color: var(--muted);">${timezoneDisplay}</td>`;
       html += `<td style="padding: 12px;">${chapterDisplay}</td>`;
       html += `<td style="padding: 12px; text-align: center;">${log.score}/${log.totalCards}</td>`;
       html += `<td style="padding: 12px; text-align: center; color: ${scoreColor}; font-weight: 600;">${percentage}%</td>`;
