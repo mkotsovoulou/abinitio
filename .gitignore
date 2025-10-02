@@ -7,3 +7,15 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+**/bin/
+**/obj/
+*.cache
+*.log
