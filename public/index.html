@@ -118,6 +118,18 @@
     <div style="display: flex; gap: 12px; margin-top: 16px;">
       <button id="startBtn" class="btn btn-primary">Start Session</button>
       <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">View Progress Log</button>
+      <div style="margin-top: 16px;">
+  <label for="voiceSelect" style="font-weight:600;">Choose Accent</label>
+  <select id="voiceSelect" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e5e7eb; font-size:16px;">
+    <option value="es-ES-Neural2-A">🇪🇸 Spanish (Spain) – Female</option>
+    <option value="es-ES-Neural2-B">🇪🇸 Spanish (Spain) – Male</option>
+    <option value="es-MX-Neural2-A">🇲🇽 Spanish (Mexico) – Female</option>
+    <option value="es-MX-Neural2-B">🇲🇽 Spanish (Mexico) – Male</option>
+    <option value="es-US-Neural2-A">🇺🇸 Spanish (US) – Female</option>
+    <option value="es-US-Neural2-B">🇺🇸 Spanish (US) – Male</option>
+  </select>
+</div>
+
     </div>
 
     <!-- Link to Add Page -->
@@ -369,13 +381,31 @@ $("viewLogsBtn").onclick=showLogs;
 $("backToSetupBtn").onclick=()=>showPanel("setup");
 
 // 🔊 Speak button
-$("speakBtn").onclick = () => {
+// 🔊 Google TTS speak button with selectable voice
+$("speakBtn").onclick = async () => {
   const currentCard = sessionCards[currentIndex];
   if (!currentCard) return;
-  const msg = new SpeechSynthesisUtterance(currentCard.es);
-  msg.lang = "es-ES";
-  window.speechSynthesis.speak(msg);
+
+  const voiceSelect = document.getElementById("voiceSelect");
+  const selectedVoice = voiceSelect ? voiceSelect.value : "es-ES-Neural2-A";
+  const selectedLang = selectedVoice.startsWith("es-MX") ? "es-MX" :
+                       selectedVoice.startsWith("es-US") ? "es-US" : "es-ES";
+
+  try {
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: currentCard.es, lang: selectedLang, voiceName: selectedVoice })
+    });
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.play();
+  } catch (err) {
+    console.error("TTS error:", err);
+  }
 };
+
 
 loadFlashcards();
 </script>
