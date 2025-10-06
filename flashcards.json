@@ -304,8 +304,8 @@
 }
 ,
   {
-    "chapter": "1A",
-    "title": "Características personales",
+    "chapter": "1-2 A",
+    "title": "Características personales, Descripciones físicas y la personalidad",
     "totalWords": 123,
     "words": [
       {
@@ -504,6 +504,10 @@
         "es": "ser alto",
         "en": "to be tall"
       },
+            {
+        "es": "chica alta",
+        "en": "tall girl"
+      },
       {
         "es": "de mediana estatura",
         "en": "of average height"
@@ -513,20 +517,8 @@
         "en": "to be slim"
       },
       {
-        "es": "ser flaco",
-        "en": "to be thin"
-      },
-      {
         "es": "ser fuerte",
         "en": "to be strong"
-      },
-      {
-        "es": "ser corpulento",
-        "en": "to be stout"
-      },
-      {
-        "es": "ser fornido",
-        "en": "to be chunky"
       },
       {
         "es": "tener los ojos azules",
@@ -585,10 +577,6 @@
         "en": "to have straight hair"
       },
       {
-        "es": "tener el pelo ondulado",
-        "en": "to have wavy hair"
-      },
-      {
         "es": "tener el pelo rizado",
         "en": "to have curly hair"
       },
@@ -621,52 +609,16 @@
         "en": "to have dark skin"
       },
       {
-        "es": "tener pecas",
-        "en": "to have freckles"
-      },
-      {
         "es": "tener arrugas",
         "en": "to have wrinkles"
-      },
-      {
-        "es": "tener granos",
-        "en": "to have pimples"
-      },
-      {
-        "es": "tener acné",
-        "en": "to have acne"
-      },
-      {
-        "es": "tener una cicatriz",
-        "en": "to have a scar"
       },
       {
         "es": "usar anteojos",
         "en": "to wear glasses"
       },
-      {
-        "es": "usar lentes de contacto",
-        "en": "to wear contact lenses"
-      },
-      {
-        "es": "usar aparatos",
-        "en": "to wear braces"
-      },
-      {
-        "es": "llevar el cabello en una cola de caballo",
-        "en": "to wear hair in a ponytail"
-      },
-      {
-        "es": "llevar el cabello con coletas",
-        "en": "to wear hair in pigtails"
-      },
-      {
-        "es": "llevar el cabello con trenzas",
-        "en": "to wear hair in braids"
-      },
-      {
-        "es": "llevar el cabello con un moño",
-        "en": "to wear hair in a bun"
+     {
+        "es": "gafas de sol",
+        "en": "sunglasses"
       },
       {
         "es": "cuidar tu apariencia",
@@ -696,14 +648,7 @@
         "es": "ponerse atuendos elegantes",
         "en": "to wear elegant clothes"
       },
-      {
-        "es": "ponerse atuendos descuidados",
-        "en": "to wear scruffy clothes"
-      },
-      {
-        "es": "ponerse atuendos excéntricos",
-        "en": "to wear eccentric clothes"
-      },
+
       {
         "es": "ser simpático",
         "en": "to be friendly"
