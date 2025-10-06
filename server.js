@@ -1,8 +1,38 @@
-// server.js
 const express = require("express");
 const path = require("path");
-const fs = require("fs"); // <-- you need this
+const fs = require("fs");
 const db = require("./database");
+
+// Google Cloud Text-to-Speech setup
+const textToSpeech = require("@google-cloud/text-to-speech");
+
+let credentialsPath;
+if (process.env.GOOGLE_TTS_KEY) {
+  try {
+    const tempPath = path.join(__dirname, "google-tts-key-temp.json");
+    fs.writeFileSync(tempPath, process.env.GOOGLE_TTS_KEY);
+    credentialsPath = tempPath;
+    console.log("✅ Google TTS key loaded from Heroku config var");
+  } catch (err) {
+    console.error("❌ Could not write temp credentials file:", err);
+  }
+} else {
+  credentialsPath = path.join(__dirname, "google-tts-key.json");
+  console.log("✅ Google TTS key loaded from local file");
+}
+
+let ttsClient;
+try {
+  ttsClient = new textToSpeech.TextToSpeechClient({
+    keyFilename: credentialsPath,
+  });
+  console.log("✅ Google TTS client initialized");
+} catch (err) {
+  console.error("❌ Failed to initialize TTS client:", err);
+}
+
+const app = express();
+
 const app = express();
 
 // Middleware to parse JSON bodies
