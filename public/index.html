@@ -101,10 +101,11 @@
     <div id="card" class="center">Loading…</div>
     <div id="translation" class="center"></div>
     <div class="center">
-      <button id="knowBtn" class="btn btn-know">I Know This</button>
-      <button id="dontKnowBtn" class="btn btn-dontknow">I Don't Know This</button>
-      <button id="nextBtn" class="btn btn-next">Next</button>
-    </div>
+  <button id="speakBtn" class="btn" style="background: #3b82f6; color: #fff;">🔊 Speak</button>
+  <button id="knowBtn" class="btn btn-know">I Know This</button>
+  <button id="dontKnowBtn" class="btn btn-dontknow">I Don't Know This</button>
+  <button id="nextBtn" class="btn btn-next">Next</button>
+</div>
   </section>
 
   <!-- Results -->
@@ -300,6 +301,17 @@ $("nextBtn").onclick=nextCard;
 $("restartBtn").onclick=()=>location.reload();
 $("viewLogsBtn").onclick=showLogs;
 $("backToSetupBtn").onclick=()=>showPanel("setup");
+
+
+// 🔊 Speak button: uses browser speech synthesis API
+$("speakBtn").onclick = () => {
+  const currentCard = sessionCards[currentIndex];
+  if (!currentCard) return;
+  const msg = new SpeechSynthesisUtterance(currentCard.es);
+  msg.lang = "es-ES";
+  window.speechSynthesis.speak(msg);
+};
+
 
 loadFlashcards();
 </script>
