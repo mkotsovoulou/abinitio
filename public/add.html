@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add & Manage Spanish Words</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f7f7fb;
+      color: #111827;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+    h2, h3 { margin-bottom: 12px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      width: 100%;
+    }
+    button {
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      border: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    button:hover { opacity: 0.9; }
+    a { color: #2563eb; text-decoration: none; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
+    }
+    tr:hover td {
+      background: #f9fafb;
+    }
+    .btn-delete {
+      background: #ef4444;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Manage Spanish Flashcards</h2>
+  <p><a href="/">&larr; Back to Flashcards</a></p>
+
+  <h3>Add New Word / Chapter</h3>
+  <div class="row">
+    <div>
+      <label for="chapterSelectAdd">Select Existing Chapter</label>
+      <select id="chapterSelectAdd">
+        <option value="">— Choose existing —</option>
+      </select>
+    </div>
+    <div>
+      <label for="newChapterCode">Or Create New Chapter</label>
+      <input id="newChapterCode" placeholder="e.g. 2A" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="newChapterTitle">New Chapter Title</label>
+      <input id="newChapterTitle" placeholder="e.g. Verbos irregulares" />
+    </div>
+    <div></div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="spanishAdd">Spanish</label>
+      <input id="spanishAdd" placeholder="e.g. casa" />
+    </div>
+    <div>
+      <label for="englishAdd">English</label>
+      <input id="englishAdd" placeholder="e.g. house" />
+    </div>
+  </div>
+
+  <button id="addWordBtn">➕ Add Word</button>
+
+  <hr style="margin: 32px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3>Words in Chapter</h3>
+  <div class="row">
+    <div>
+      <label for="chapterViewSelect">Select Chapter to View</label>
+      <select id="chapterViewSelect">
+        <option value="">— Choose chapter —</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="wordTableContainer">
+    <p>Select a chapter to view its words.</p>
+  </div>
+
+ <script>
+  function $(id){ return document.getElementById(id); }
+
+  async function api(path, body) {
+    const res = await fetch(path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body || {})
+    });
+    let data;
+    try { data = await res.json(); } catch { data = {}; }
+    if (!res.ok) {
+      const msg = (data && data.error) ? data.error : `HTTP ${res.status}`;
+      throw new Error(msg);
+    }
+    return data;
+  }
+
+  async function getChapters() {
+    const res = await fetch("/api/flashcards");
+    if (!res.ok) throw new Error(`Cannot load chapters (HTTP ${res.status})`);
+    return res.json();
+  }
+
+  async function refreshChapterLists() {
+    const chapters = await getChapters();
+    const selects = [ $("chapterSelectAdd"), $("chapterViewSelect") ];
+    for (const sel of selects) {
+      sel.innerHTML = '<option value="">— Choose chapter —</option>';
+      chapters.forEach(ch => {
+        const opt = document.createElement("option");
+        opt.value = ch.chapter;
+        opt.textContent = `Chapter ${ch.chapter}: ${ch.title}`;
+        sel.appendChild(opt);
+      });
+    }
+  }
+
+  $("addWordBtn").onclick = async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true; btn.textContent = "Saving…";
+
+    try {
+      let chapter_code = $("chapterSelectAdd").value.trim();
+      const newChapterCode = $("newChapterCode").value.trim();
+      const newChapterTitle = $("newChapterTitle").value.trim();
+      const spanish = $("spanishAdd").value.trim();
+      const english = $("englishAdd").value.trim();
+
+      if (newChapterCode) chapter_code = newChapterCode;
+
+      if (!chapter_code || !spanish || !english) {
+        alert("Please fill in Chapter, Spanish, and English.");
+        return;
+      }
+
+      // If creating a new chapter, add it first (idempotent via INSERT OR IGNORE)
+      if (newChapterCode) {
+        await api("/api/add-chapter", {
+          chapter_code: newChapterCode,
+          title: newChapterTitle || "(no title)"
+        });
+      }
+
+      // Add the word
+      await api("/api/add-word", { chapter_code, spanish, english });
+      alert("Word added!");
+
+      // Clear form and refresh lists/table
+      $("spanishAdd").value = "";
+      $("englishAdd").value = "";
+      $("newChapterCode").value = "";
+      $("newChapterTitle").value = "";
+      $("chapterSelectAdd").value = "";
+
+      await refreshChapterLists();
+      if ($("chapterViewSelect").value === chapter_code) loadWords(chapter_code);
+
+    } catch (err) {
+      console.error(err);
+      alert("Add failed: " + err.message);
+    } finally {
+      btn.disabled = false; btn.textContent = "➕ Add Word";
+    }
+  };
+
+  $("chapterViewSelect").onchange = (e) => {
+    const code = e.target.value;
+    if (code) loadWords(code);
+    else $("wordTableContainer").innerHTML = "<p>Select a chapter to view its words.</p>";
+  };
+
+  async function loadWords(chapter_code) {
+    try {
+      const chapters = await getChapters();
+      const chapter = chapters.find(c => c.chapter === chapter_code);
+      if (!chapter || !chapter.words?.length) {
+        $("wordTableContainer").innerHTML = "<p>This chapter has no words yet.</p>";
+        return;
+      }
+
+  let html = `<table><thead>
+  <tr>
+    <th>Spanish</th>
+    <th>English</th>
+    <th>Progress</th>
+    <th style='width:80px;text-align:center;'>Action</th>
+  </tr></thead><tbody>`;
+
+chapter.words.forEach(w => {
+  const shown = w.shown_count || 0;
+  const known = w.known_count || 0;
+  const ratio = shown > 0 ? Math.round((known / shown) * 100) : 0;
+  const color =
+    ratio >= 80 ? "green" :
+    ratio >= 50 ? "orange" : "red";
+  html += `<tr>
+    <td>${w.es}</td>
+    <td>${w.en}</td>
+    <td style="color:${color}; font-weight:600;">${ratio}%</td>
+    <td style="text-align:center;">
+      <button class='btn-delete' data-es="${encodeURIComponent(w.es)}" data-en="${encodeURIComponent(w.en)}">✖</button>
+    </td>
+  </tr>`;
+});
+
+      html += "</tbody></table>";
+
+      $("wordTableContainer").innerHTML = html;
+
+      document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.onclick = async () => {
+          const es = decodeURIComponent(btn.dataset.es);
+          const en = decodeURIComponent(btn.dataset.en);
+          if (!confirm(`Delete word "${es}"?`)) return;
+          try {
+            await api("/api/delete-word", { chapter_code, spanish: es, english: en });
+            loadWords(chapter_code);
+          } catch (err) {
+            alert("Delete failed: " + err.message);
+          }
+        };
+      });
+    } catch (err) {
+      console.error(err);
+      $("wordTableContainer").innerHTML = "<p>Error loading words: " + err.message + "</p>";
+    }
+  }
+
+  // Initial load
+  (async () => {
+    try { await refreshChapterLists(); }
+    catch (err) {
+      console.error(err);
+      alert("Cannot load chapters: " + err.message + ". Is the server running and /api/flashcards available?");
+    }
+  })();
+</script>
+
+</body>
+</html>

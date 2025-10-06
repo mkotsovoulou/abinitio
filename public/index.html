@@ -35,6 +35,12 @@
       display: none;
     }
     .panel.active { display: block; }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
     h2 { margin: 0 0 12px; font-weight: 700; }
     label { font-weight: 600; }
     select, input[type="number"] {
@@ -59,7 +65,6 @@
     .btn-know { background: var(--success); color: #fff; }
     .btn-dontknow { background: var(--danger); color: #fff; }
     .btn-next { background: var(--accent-2); color: #fff; display: none; }
-    .stack { display: grid; gap: 12px; }
     .center { text-align: center; }
     #card {
       font-size: clamp(36px, 6vw, 72px);
@@ -73,12 +78,30 @@
       display: none;
     }
     #progress { color: var(--muted); font-weight: 600; }
+    .banner {
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      color: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .banner p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.4;
+    }
   </style>
 </head>
 <body>
   <!-- Setup -->
   <section id="setup" class="panel active">
-    <h2>Spanish Flashcards</h2>
+    <div class="banner">
+      <h1>¡Bienvenido!</h1>
+      <p>Welcome to <strong>Spanish Flashcards</strong> — choose a chapter, start learning, or add new words to your collection!</p>
+    </div>
+
     <div class="row">
       <div>
         <label for="chapterSelect">Chapter</label>
@@ -91,21 +114,39 @@
         <input type="number" id="wordCount" min="1" value="10" />
       </div>
     </div>
+
     <div style="display: flex; gap: 12px; margin-top: 16px;">
       <button id="startBtn" class="btn btn-primary">Start Session</button>
       <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">View Progress Log</button>
     </div>
-  </section>  <!-- Flashcard -->
+
+    <!-- Link to Add Page -->
+    <p style="margin-top: 16px; text-align:center;">
+      <a href="/add.html"
+         style="display:inline-block; background: var(--accent-2); color:#fff; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600;">
+         ➕ Add or Manage Words
+      </a>
+    </p>
+    <p style="margin-top: 12px; text-align:center;">
+  <a href="/progress.html"
+     style="display:inline-block; background: var(--accent); color:#fff; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600;">
+     📈 View My Progress
+  </a>
+</p>
+
+  </section>
+
+  <!-- Flashcard -->
   <section id="flashcard" class="panel">
     <div id="progress"></div>
     <div id="card" class="center">Loading…</div>
     <div id="translation" class="center"></div>
     <div class="center">
-  <button id="speakBtn" class="btn" style="background: #3b82f6; color: #fff;">🔊 Speak</button>
-  <button id="knowBtn" class="btn btn-know">I Know This</button>
-  <button id="dontKnowBtn" class="btn btn-dontknow">I Don't Know This</button>
-  <button id="nextBtn" class="btn btn-next">Next</button>
-</div>
+      <button id="speakBtn" class="btn" style="background: #3b82f6; color: #fff;">🔊 Speak</button>
+      <button id="knowBtn" class="btn btn-know">I Know This</button>
+      <button id="dontKnowBtn" class="btn btn-dontknow">I Don't Know This</button>
+      <button id="nextBtn" class="btn btn-next">Next</button>
+    </div>
   </section>
 
   <!-- Results -->
@@ -131,6 +172,7 @@ let currentIndex = 0;
 let score = 0;
 let revealed = false;
 let currentChapter = null;
+let results = []; // ✅ store detailed per-word results
 
 function $(id){ return document.getElementById(id); }
 
@@ -138,10 +180,11 @@ async function loadFlashcards() {
   const res = await fetch("/api/flashcards");
   chapters = await res.json();
   const select = $("chapterSelect");
+  select.innerHTML = '<option value="">Select a chapter…</option>';
   chapters.forEach(ch => {
     const opt = document.createElement("option");
     opt.value = ch.chapter;
-     opt.textContent = `Chapter ${ch.chapter}: ${ch.title} (${ch.totalWords} words)`;
+    opt.textContent = `Chapter ${ch.chapter}: ${ch.title} (${ch.totalWords} words)`;
     select.appendChild(opt);
   });
 }
@@ -149,11 +192,51 @@ async function loadFlashcards() {
 function startSession(){
   const chId = $("chapterSelect").value;
   const selected = chapters.find(c => c.chapter === chId);
+  if (!selected) {
+    alert("Please select a chapter first.");
+    return;
+  }
   currentChapter = selected;
   let count = parseInt($("wordCount").value) || 1;
   if(count > selected.words.length) count = selected.words.length;
-  sessionCards = shuffle([...selected.words]).slice(0,count);
-  currentIndex=0; score=0;
+ // ✅ Weighted selection: prefer unseen or weak words
+const weighted = [...selected.words].map(w => {
+  const shown = w.shown_count || 0;
+  const known = w.known_count || 0;
+  const mastery = shown > 0 ? known / shown : 0;
+  let weight = 1;
+
+  // Unseen words: high priority
+  if (shown === 0) weight = 5;
+  // Weak words (<60% mastery): medium-high priority
+  else if (mastery < 0.6) weight = 3;
+  // Moderate mastery (60–80%)
+  else if (mastery < 0.8) weight = 1.5;
+  // Strong mastery (>80%): low priority
+  else weight = 0.5;
+
+  return { w, weight };
+});
+
+// Draw 'count' words using weighted probability
+const chosen = [];
+for (let i = 0; i < count; i++) {
+  const totalWeight = weighted.reduce((a, b) => a + b.weight, 0);
+  let r = Math.random() * totalWeight;
+  for (const obj of weighted) {
+    r -= obj.weight;
+    if (r <= 0) {
+      chosen.push(obj.w);
+      // Reduce its weight to lower repeat chance
+      obj.weight *= 0.3;
+      break;
+    }
+  }
+}
+
+sessionCards = shuffle(chosen);
+
+  currentIndex=0; score=0; results = []; // ✅ reset results
   showPanel("flashcard");
   showCard();
 }
@@ -179,8 +262,16 @@ function showCard(){
 function handleAnswer(isKnown){
   if(!revealed){
     $("translation").style.display="block";
+
+    // ✅ record this word’s outcome
+    const currentWord = sessionCards[currentIndex];
+    results.push({
+      es: currentWord.es,
+      en: currentWord.en,
+      known: isKnown
+    });
+
     if(isKnown) score++;
-    // hide know/don't know, show NEXT
     $("knowBtn").style.display="none";
     $("dontKnowBtn").style.display="none";
     $("nextBtn").style.display="inline-block";
@@ -189,46 +280,33 @@ function handleAnswer(isKnown){
 }
 
 function nextCard(){ currentIndex++; showCard(); }
+
 function endSession(){ 
   showPanel("results"); 
   $("score").textContent=`You knew ${score} of ${sessionCards.length}`;
-  // Log the session results
   saveLogEntry();
 }
 
 async function saveLogEntry() {
   if (!currentChapter) return;
-  
-  // Get client's local date and time
   const now = new Date();
-  const clientDate = now.toISOString().split('T')[0]; // YYYY-MM-DD
-  const clientTime = now.toTimeString().split(' ')[0]; // HH:MM:SS
-  const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  
   const logData = {
     chapter: currentChapter.chapter,
     chapterTitle: currentChapter.title,
     score: score,
     totalCards: sessionCards.length,
-    clientDate: clientDate,
-    clientTime: clientTime,
-    clientTimezone: clientTimezone
+    clientDate: now.toISOString().split('T')[0],
+    clientTime: now.toTimeString().split(' ')[0],
+    clientTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    wordsShown: results // ✅ send per-word data to backend
   };
-  
+
   try {
-    const response = await fetch("/api/log", {
+    await fetch("/api/log", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(logData)
     });
-    
-    if (response.ok) {
-      console.log("Log entry saved successfully");
-    } else {
-      console.error("Failed to save log entry");
-    }
   } catch (error) {
     console.error("Error saving log entry:", error);
   }
@@ -241,20 +319,14 @@ async function showLogs() {
   try {
     const response = await fetch("/api/logs");
     const logs = await response.json();
-    
     const container = $("logsContainer");
     if (logs.length === 0) {
       container.innerHTML = "<p>No session logs yet. Complete a flashcard session to see your progress!</p>";
       return;
     }
-    
-    // Sort logs by date and time (newest first)
-    logs.sort((a, b) => {
-      const dateA = new Date(a.date + ' ' + a.time);
-      const dateB = new Date(b.date + ' ' + b.time);
-      return dateB - dateA;
-    });
-    
+
+    logs.sort((a, b) => new Date(b.date + ' ' + b.time) - new Date(a.date + ' ' + a.time));
+
     let html = '<div style="overflow-x: auto;"><table style="width: 100%; border-collapse: collapse; margin-top: 16px;">';
     html += '<thead><tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">';
     html += '<th style="padding: 12px; text-align: left;">Date</th>';
@@ -265,29 +337,23 @@ async function showLogs() {
     html += '<th style="padding: 12px; text-align: center;">Percentage</th>';
     html += '<th style="padding: 12px; text-align: left;">IP Address</th>';
     html += '</tr></thead><tbody>';
-    
+
     logs.forEach(log => {
       const percentage = log.percentage || Math.round((log.score / log.totalCards) * 100);
       const scoreColor = percentage >= 80 ? 'var(--success)' : percentage >= 60 ? '#f59e0b' : 'var(--danger)';
-      
-      const chapterDisplay = log.chapterTitle || `Chapter ${log.chapter}`;
-      const ipDisplay = log.ipAddress || 'Unknown';
-      const timezoneDisplay = log.timezone || 'Unknown';
-      
-      html += '<tr style="border-bottom: 1px solid #e5e7eb;">';
-      html += `<td style="padding: 12px;">${log.date}</td>`;
-      html += `<td style="padding: 12px;">${log.time}</td>`;
-      html += `<td style="padding: 12px; font-size: 12px; color: var(--muted);">${timezoneDisplay}</td>`;
-      html += `<td style="padding: 12px;">${chapterDisplay}</td>`;
-      html += `<td style="padding: 12px; text-align: center;">${log.score}/${log.totalCards}</td>`;
-      html += `<td style="padding: 12px; text-align: center; color: ${scoreColor}; font-weight: 600;">${percentage}%</td>`;
-      html += `<td style="padding: 12px; font-family: monospace; font-size: 14px;">${ipDisplay}</td>`;
-      html += '</tr>';
+      html += `<tr style="border-bottom: 1px solid #e5e7eb;">
+        <td style="padding: 12px;">${log.date}</td>
+        <td style="padding: 12px;">${log.time}</td>
+        <td style="padding: 12px; font-size: 12px; color: var(--muted);">${log.timezone || 'Unknown'}</td>
+        <td style="padding: 12px;">${log.chapterTitle || '—'}</td>
+        <td style="padding: 12px; text-align: center;">${log.score}/${log.totalCards}</td>
+        <td style="padding: 12px; text-align: center; color: ${scoreColor}; font-weight: 600;">${percentage}%</td>
+        <td style="padding: 12px; font-family: monospace; font-size: 14px;">${log.ipAddress || 'Unknown'}</td>
+      </tr>`;
     });
-    
+
     html += '</tbody></table></div>';
     container.innerHTML = html;
-    
   } catch (error) {
     console.error("Error loading logs:", error);
     $("logsContainer").innerHTML = "<p>Error loading logs. Please try again.</p>";
@@ -302,8 +368,7 @@ $("restartBtn").onclick=()=>location.reload();
 $("viewLogsBtn").onclick=showLogs;
 $("backToSetupBtn").onclick=()=>showPanel("setup");
 
-
-// 🔊 Speak button: uses browser speech synthesis API
+// 🔊 Speak button
 $("speakBtn").onclick = () => {
   const currentCard = sessionCards[currentIndex];
   if (!currentCard) return;
@@ -311,7 +376,6 @@ $("speakBtn").onclick = () => {
   msg.lang = "es-ES";
   window.speechSynthesis.speak(msg);
 };
-
 
 loadFlashcards();
 </script>

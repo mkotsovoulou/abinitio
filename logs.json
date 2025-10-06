@@ -9,5 +9,38 @@
     "totalCards": 10,
     "percentage": 70,
     "ipAddress": "::1"
+  },
+  {
+    "date": "2025-10-06",
+    "time": "21:58:01",
+    "timezone": "Europe/Athens",
+    "chapter": "0A",
+    "chapterTitle": "Conceptos básicos",
+    "score": 7,
+    "totalCards": 10,
+    "percentage": 70,
+    "ipAddress": "::1"
+  },
+  {
+    "date": "2025-10-06",
+    "time": "21:59:47",
+    "timezone": "Europe/Athens",
+    "chapter": "0A",
+    "chapterTitle": "Conceptos básicos",
+    "score": 10,
+    "totalCards": 10,
+    "percentage": 100,
+    "ipAddress": "::1"
+  },
+  {
+    "date": "2025-10-06",
+    "time": "22:01:09",
+    "timezone": "Europe/Athens",
+    "chapter": "0A",
+    "chapterTitle": "Conceptos básicos",
+    "score": 10,
+    "totalCards": 10,
+    "percentage": 100,
+    "ipAddress": "::1"
   }
 ]

@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs"); // <-- you need this
-
+const db = require("./database");
 const app = express();
 
 // Middleware to parse JSON bodies
@@ -13,87 +13,158 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // API endpoint to serve flashcards.json
 app.get("/api/flashcards", (req, res) => {
-  fs.readFile(path.join(__dirname, "flashcards.json"), "utf8", (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: "Unable to load flashcards" });
-    }
-    res.json(JSON.parse(data));
+  db.all("SELECT * FROM chapters ORDER BY chapter_code", [], (err, chapters) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    const promises = chapters.map(ch => new Promise((resolve, reject) => {
+      db.all(
+  `SELECT spanish AS es, english AS en,
+          COALESCE(shown_count, 0) AS shown_count,
+          COALESCE(known_count, 0) AS known_count
+   FROM words
+   WHERE chapter_code = ?
+   ORDER BY id`,
+  [ch.chapter_code],
+  (err, words) => {
+    if (err) return reject(err);
+    resolve({
+      chapter: ch.chapter_code,
+      title: ch.title,
+      totalWords: words.length,
+      words
+    });
+  }
+);
+
+    }));
+
+    Promise.all(promises)
+      .then(results => res.json(results))
+      .catch(err => res.status(500).json({ error: err.message }));
   });
 });
 
-// API endpoint to save log entries
+
 app.post("/api/log", (req, res) => {
-  const { chapter, score, totalCards, chapterTitle, clientDate, clientTime, clientTimezone } = req.body;
-  
+  const {
+    chapter,
+    score,
+    totalCards,
+    chapterTitle,
+    clientDate,
+    clientTime,
+    clientTimezone,
+    wordsShown
+  } = req.body || {};
+
   if (!chapter || score === undefined || !totalCards) {
     return res.status(400).json({ error: "Missing required fields: chapter, score, totalCards" });
   }
 
-  // Get client IP address
-  const clientIP = req.headers['x-forwarded-for'] || 
-                   req.headers['x-real-ip'] || 
-                   req.connection.remoteAddress || 
-                   req.socket.remoteAddress ||
-                   (req.connection.socket ? req.connection.socket.remoteAddress : null) ||
-                   req.ip;
+  const clientIP =
+    req.headers["x-forwarded-for"] ||
+    req.headers["x-real-ip"] ||
+    req.connection?.remoteAddress ||
+    req.socket?.remoteAddress ||
+    req.ip;
 
-  const logEntry = {
-    date: clientDate || new Date().toISOString().split('T')[0], // Use client date or fallback to server date
-    time: clientTime || new Date().toTimeString().split(' ')[0], // Use client time or fallback to server time
-    timezone: clientTimezone || 'Unknown',
-    chapter: chapter,
-    chapterTitle: chapterTitle || `Chapter ${chapter}`,
-    score: score,
-    totalCards: totalCards,
-    percentage: Math.round((score / totalCards) * 100),
-    ipAddress: clientIP
-  };
+  const date = clientDate || new Date().toISOString().split("T")[0];
+  const time = clientTime || new Date().toTimeString().split(" ")[0];
+  const timezone = clientTimezone || "Unknown";
+  const percentage = Math.round((score / totalCards) * 100);
+  const chapter_code = chapter;
+  const chapter_title = chapterTitle || `Chapter ${chapter}`;
+  const words_json = wordsShown ? JSON.stringify(wordsShown) : null;
 
-  const logsPath = path.join(__dirname, "logs.json");
-  
-  // Read existing logs or create empty array
-  fs.readFile(logsPath, "utf8", (err, data) => {
-    let logs = [];
-    if (!err && data) {
-      try {
-        logs = JSON.parse(data);
-      } catch (parseErr) {
-        console.error("Error parsing logs.json:", parseErr);
+  // ✅ Insert into session_logs
+  db.run(
+    `INSERT INTO session_logs
+     (date, time, timezone, chapter_code, chapter_title, score, total_cards, percentage, ip_address, words_json)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [date, time, timezone, chapter_code, chapter_title, score, totalCards, percentage, clientIP, words_json],
+    function (err) {
+      if (err) {
+        console.error("DB insert error:", err);
+        return res.status(500).json({ error: err.message });
       }
+
+      // ✅ Update per-word progress
+      if (wordsShown && Array.isArray(wordsShown)) {
+        wordsShown.forEach(w => {
+          const { es, en, known } = w;
+          if (!es) return;
+          db.run(
+            `UPDATE words
+             SET shown_count = COALESCE(shown_count, 0) + 1,
+                 known_count = COALESCE(known_count, 0) + ?
+             WHERE spanish = ? AND english = ?`,
+            [known ? 1 : 0, es, en]
+          );
+        });
+      }
+
+      res.json({ message: "Log entry and progress saved", sessionId: this.lastID });
     }
-    
-    // Add new log entry
-    logs.push(logEntry);
-    
-    // Write back to file
-    fs.writeFile(logsPath, JSON.stringify(logs, null, 2), (writeErr) => {
-      if (writeErr) {
-        return res.status(500).json({ error: "Unable to save log entry" });
-      }
-      res.json({ message: "Log entry saved successfully", entry: logEntry });
-    });
-  });
+  );
 });
+
+
 
 // API endpoint to get logs
 app.get("/api/logs", (req, res) => {
-  fs.readFile(path.join(__dirname, "logs.json"), "utf8", (err, data) => {
-    if (err) {
-      // If file doesn't exist, return empty array
-      return res.json([]);
+  db.all(
+    `SELECT id, date, time, timezone, chapter_code AS chapter,
+            chapter_title AS chapterTitle, score, total_cards AS totalCards,
+            percentage, ip_address AS ipAddress
+     FROM session_logs
+     ORDER BY date DESC, time DESC`,
+    [],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(rows);
     }
-    try {
-      const logs = JSON.parse(data);
-      res.json(logs);
-    } catch (parseErr) {
-      res.status(500).json({ error: "Unable to parse logs" });
-    }
-  });
+  );
 });
+
+
+// Add a new word to a chapter
+app.post("/api/add-word", (req, res) => {
+  const { chapter_code, spanish, english } = req.body || {};
+  if (!chapter_code || !spanish || !english) {
+    return res.status(400).json({ error: "Missing data" });
+  }
+
+  db.run(
+    "INSERT INTO words (chapter_code, spanish, english) VALUES (?, ?, ?)",
+    [chapter_code.trim(), spanish.trim(), english.trim()],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ id: this.lastID, message: "Word added successfully" });
+    }
+  );
+});
+
 
 // Fallback to index.html (in case you’re using a single page app)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// ✅ Delete a word
+app.post("/api/delete-word", (req, res) => {
+  const { chapter_code, spanish, english } = req.body;
+  if (!chapter_code || !spanish) {
+    return res.status(400).json({ error: "Missing parameters" });
+  }
+
+  db.run(
+    "DELETE FROM words WHERE chapter_code = ? AND spanish = ? AND english = ?",
+    [chapter_code, spanish, english],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ message: "Word deleted", changes: this.changes });
+    }
+  );
 });
 
 // Heroku provides the PORT via environment variable
@@ -101,3 +172,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Spanish Words App running on port ${PORT}`);
 });
+
+

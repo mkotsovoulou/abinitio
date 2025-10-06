@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Progress Dashboard</title>
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #7c3aed;
+      --accent-2: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      max-width: 960px;
+      margin-inline: auto;
+    }
+    h1 {
+      color: var(--accent-2);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    h2 {
+      margin-top: 32px;
+      color: var(--accent);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+      background: #f1f5f9;
+      color: #374151;
+    }
+    tr:hover { background: #f9fafb; }
+    .ratio {
+      font-weight: 700;
+    }
+    .high { color: var(--success); }
+    .mid { color: var(--warning); }
+    .low { color: var(--danger); }
+    a.btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: var(--accent-2);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 My Progress</h1>
+  <p>See how well you know each word by chapter. Green = mastered, orange = needs review, red = weak.</p>
+
+  <div id="content">Loading progress...</div>
+
+  <a href="/index.html" class="btn">⬅ Back to Home</a>
+
+  <script>
+    async function loadProgress() {
+      try {
+        const res = await fetch("/api/flashcards");
+        const chapters = await res.json();
+        const container = document.getElementById("content");
+
+        if (!chapters || chapters.length === 0) {
+          container.innerHTML = "<p>No chapters found.</p>";
+          return;
+        }
+
+        let html = "";
+        chapters.forEach(ch => {
+          html += `<h2>Chapter ${ch.chapter}: ${ch.title}</h2>`;
+          if (!ch.words || ch.words.length === 0) {
+            html += "<p>No words in this chapter.</p>";
+            return;
+          }
+
+          html += "<table><thead><tr><th>Spanish</th><th>English</th><th>Progress</th></tr></thead><tbody>";
+          ch.words.forEach(w => {
+            const shown = w.shown_count || 0;
+            const known = w.known_count || 0;
+            const ratio = shown > 0 ? Math.round((known / shown) * 100) : 0;
+            let css = "low";
+            if (ratio >= 80) css = "high";
+            else if (ratio >= 50) css = "mid";
+            html += `<tr>
+              <td>${w.es}</td>
+              <td>${w.en}</td>
+              <td class="ratio ${css}">${ratio}%</td>
+            </tr>`;
+          });
+          html += "</tbody></table>";
+        });
+
+        container.innerHTML = html;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("content").innerHTML = "<p>Error loading progress.</p>";
+      }
+    }
+
+    loadProgress();
+  </script>
+</body>
+</html>
