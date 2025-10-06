@@ -100,6 +100,31 @@
   ]
 },
 {
+  "chapter": "1 La Clase",
+  "title": "Mira los objetos de clase y las expresiones básicas",
+  "totalWords": 67,
+  "words": [
+    { "es": "la puerta", "en": "the door" },
+    { "es": "los libros", "en": "the books" },
+    { "es": "el cuaderno", "en": "the notebook" },
+    {"es": "la hoja de papel", "en": "the sheet of paper" },
+    { "es": "el bolígrafo", "en": "the pen" },
+    { "es": "el lápiz", "en": "the pencil" },
+    { "es": "los lápices de colores", "en": "the colored pencils" },
+    { "es": "la goma ", "en": "the eraser" },
+    { "es": "el sacapuntas", "en": "the pencil sharpener" },
+    { "es": "la mochila", "en": "the backpack" },
+    { "es": "la pizarra", "en": "the blackboard / whiteboard" },
+    { "es": "el marcador", "en": "the marker" },
+    { "es": "la tiza", "en": "the chalk" },
+    { "es": "el escritorio", "en": "the desk" },
+    { "es": "la silla", "en": "the chair" },
+    { "es": "la computadora / el ordenador", "en": "the computer" },
+    { "es": "el proyector", "en": "the projector" },
+    { "es": "el mapa", "en": "the map" },
+    { "es": "el diccionario", "en": "the dictionary" }
+  ]},
+{
   "chapter": "0B",
   "title": "Direcciones, posiciones, transporte, la vida diaria, el tiempo y la hora",
   "totalWords": 67,
