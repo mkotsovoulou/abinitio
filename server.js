@@ -144,6 +144,36 @@ app.post("/api/add-word", (req, res) => {
   );
 });
 
+const textToSpeech = require("@google-cloud/text-to-speech");
+const ttsClient = new textToSpeech.TextToSpeechClient({
+  keyFilename: path.join(__dirname, "google-tts-key.json")
+});
+
+app.post("/api/tts", async (req, res) => {
+  try {
+    const { text, lang } = req.body;
+    if (!text) return res.status(400).json({ error: "Missing text" });
+
+    const [response] = await ttsClient.synthesizeSpeech({
+      input: { text },
+      voice: {
+        languageCode: lang || "es-ES",
+        name: "es-ES-Neural2-C", // female Castilian Spanish
+        ssmlGender: "FEMALE"
+      },
+      audioConfig: { audioEncoding: "MP3", speakingRate: 1.0 }
+    });
+
+    res.set("Content-Type", "audio/mpeg");
+    res.send(response.audioContent);
+  } catch (err) {
+    console.error("TTS error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 
 // Fallback to index.html (in case you’re using a single page app)
 app.get("*", (req, res) => {
