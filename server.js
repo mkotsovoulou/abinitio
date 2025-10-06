@@ -144,41 +144,31 @@ app.post("/api/add-word", (req, res) => {
   );
 });
 
+// ✅ Google Cloud Text-to-Speech setup
 const textToSpeech = require("@google-cloud/text-to-speech");
+const fs = require("fs");
+const path = require("path");
+
+// Handle credentials dynamically
+let credentialsPath;
+
+if (process.env.GOOGLE_TTS_KEY) {
+  // On Heroku: write env var to a temp file
+  const tempPath = path.join(__dirname, "google-tts-key-temp.json");
+  fs.writeFileSync(tempPath, process.env.GOOGLE_TTS_KEY);
+  credentialsPath = tempPath;
+  console.log("✅ Google TTS key loaded from Heroku config var");
+} else {
+  // Local dev: use JSON file in project root
+  credentialsPath = path.join(__dirname, "google-tts-key.json");
+  console.log("✅ Google TTS key loaded from local file");
+}
+
+// Initialize client
 const ttsClient = new textToSpeech.TextToSpeechClient({
-  keyFilename: path.join(__dirname, "google-tts-key.json")
+  keyFilename: credentialsPath,
 });
 
-app.post("/api/tts", async (req, res) => {
-  try {
-    const { text, lang } = req.body;
-    if (!text) return res.status(400).json({ error: "Missing text" });
-
-    const [response] = await ttsClient.synthesizeSpeech({
-      input: { text },
-      voice: {
-        languageCode: lang || "es-ES",
-        name: "es-ES-Neural2-C", // female Castilian Spanish
-        ssmlGender: "FEMALE"
-      },
-      audioConfig: { audioEncoding: "MP3", speakingRate: 1.0 }
-    });
-
-    res.set("Content-Type", "audio/mpeg");
-    res.send(response.audioContent);
-  } catch (err) {
-    console.error("TTS error:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
-
-
-// Fallback to index.html (in case you’re using a single page app)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
 
 // ✅ Delete a word
 app.post("/api/delete-word", (req, res) => {
@@ -196,6 +186,13 @@ app.post("/api/delete-word", (req, res) => {
     }
   );
 });
+
+
+// Fallback to index.html (in case you’re using a single page app)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 
 // Heroku provides the PORT via environment variable
 const PORT = process.env.PORT || 3000;
