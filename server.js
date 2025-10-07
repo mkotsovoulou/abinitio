@@ -174,30 +174,6 @@ app.post("/api/add-word", (req, res) => {
   );
 });
 
-// ✅ Google Cloud Text-to-Speech setup
-const textToSpeech = require("@google-cloud/text-to-speech");
-const fs = require("fs");
-const path = require("path");
-
-// Handle credentials dynamically
-let credentialsPath;
-
-if (process.env.GOOGLE_TTS_KEY) {
-  // On Heroku: write env var to a temp file
-  const tempPath = path.join(__dirname, "google-tts-key-temp.json");
-  fs.writeFileSync(tempPath, process.env.GOOGLE_TTS_KEY);
-  credentialsPath = tempPath;
-  console.log("✅ Google TTS key loaded from Heroku config var");
-} else {
-  // Local dev: use JSON file in project root
-  credentialsPath = path.join(__dirname, "google-tts-key.json");
-  console.log("✅ Google TTS key loaded from local file");
-}
-
-// Initialize client
-const ttsClient = new textToSpeech.TextToSpeechClient({
-  keyFilename: credentialsPath,
-});
 
 
 // ✅ Delete a word
