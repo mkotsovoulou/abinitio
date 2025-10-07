@@ -31,7 +31,6 @@ try {
   console.error("❌ Failed to initialize TTS client:", err);
 }
 
-const app = express();
 
 const app = express();
 
@@ -191,6 +190,30 @@ app.post("/api/delete-word", (req, res) => {
       res.json({ message: "Word deleted", changes: this.changes });
     }
   );
+});
+
+// ✅ Google Cloud Text-to-Speech endpoint
+app.post("/api/tts", async (req, res) => {
+  try {
+    const { text, lang, voiceName } = req.body;
+    if (!text) return res.status(400).json({ error: "Missing text" });
+
+    const [response] = await ttsClient.synthesizeSpeech({
+      input: { text },
+      voice: {
+        languageCode: lang || "es-ES",
+        name: voiceName || "es-ES-Neural2-A",
+      },
+      audioConfig: { audioEncoding: "MP3", speakingRate: 1.0 },
+    });
+
+    console.log(`🔊 Generated voice using: ${voiceName || "es-ES-Neural2-A"}`);
+    res.set("Content-Type", "audio/mpeg");
+    res.send(response.audioContent);
+  } catch (err) {
+    console.error("TTS error:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
