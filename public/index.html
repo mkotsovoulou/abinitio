@@ -117,7 +117,7 @@
 
     <div style="display: flex; gap: 12px; margin-top: 16px;">
       <button id="startBtn" class="btn btn-primary">Start Session</button>
-      <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">View Progress Log</button>
+      <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">View Study Sessions</button>
       <div style="margin-top: 16px;">
   <label for="voiceSelect" style="font-weight:600;">Choose Accent</label>
   <select id="voiceSelect" style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e5e7eb; font-size:16px;">
@@ -174,7 +174,7 @@
     <div id="logsContainer">
       <p>Loading logs...</p>
     </div>
-    <button id="backToSetupBtn" class="btn">Back to Setup</button>
+    <button id="backToSetupBtn" class="btn">Back to Home</button>
   </section>
 
 <script>
@@ -293,11 +293,32 @@ function handleAnswer(isKnown){
 
 function nextCard(){ currentIndex++; showCard(); }
 
-function endSession(){ 
-  showPanel("results"); 
-  $("score").textContent=`You knew ${score} of ${sessionCards.length}`;
-  saveLogEntry();
+async function endSession() {
+  // Calculate the score (e.g., how many were marked known)
+  const score = results.filter(r => r.known).length; 
+  const results = sessionCards.map(c => ({
+    es: c.es,
+    en: c.en,
+    known: c.known || false
+  }));
+
+  // Display a message to the user
+  $("card").textContent = `✅ Session complete! You got ${score}/${sessionCards.length} correct.`;
+  $("translation").style.display = "none";
+  $("knowBtn").style.display = "none";
+  $("dontKnowBtn").style.display = "none";
+  $("nextBtn").style.display = "none";
+  $("progress").textContent = "";
+
+  // Save the log entry to the backend
+  try {
+    await saveLogEntry();
+    console.log("📗 Session logged successfully.");
+  } catch (err) {
+    console.error("❌ Failed to log session:", err);
+  }
 }
+
 
 async function saveLogEntry() {
   if (!currentChapter) return;

@@ -90,6 +90,9 @@ app.post("/api/log", (req, res) => {
     return res.status(400).json({ error: "Missing required fields: chapter, score, totalCards" });
   }
 
+  if (totalCards === 0) {
+  return res.status(400).json({ error: "No cards in session" });
+  }
   const clientIP =
     req.headers["x-forwarded-for"] ||
     req.headers["x-real-ip"] ||
@@ -214,6 +217,21 @@ app.post("/api/tts", async (req, res) => {
     console.error("TTS error:", err);
     res.status(500).json({ error: err.message });
   }
+});
+
+app.get("/api/progress", (req, res) => {
+  db.all(
+    `SELECT chapter_code, COUNT(*) AS total,
+            SUM(known_count) AS known,
+            ROUND(SUM(known_count) * 100.0 / COUNT(*), 1) AS mastery
+     FROM words
+     GROUP BY chapter_code`,
+    [],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(rows);
+    }
+  );
 });
 
 
