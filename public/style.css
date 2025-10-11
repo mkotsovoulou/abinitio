@@ -1,0 +1,265 @@
+/* === 🎨 GLOBAL THEME VARIABLES === */
+:root {
+  --bg: #f7f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #7c3aed;
+  --accent-2: #2563eb;
+  --success: #10b981;
+  --danger: #ef4444;
+  --dark: #374151;
+}
+
+/* === 🧱 BASE LAYOUT === */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+/* === 📦 PANELS === */
+.panel {
+  width: min(920px, 100%);
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  display: none;
+}
+.panel.active { display: block; }
+
+h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent-2);
+  margin-bottom: 4px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+label { font-weight: 600; }
+
+/* === 🧮 FORM ELEMENTS === */
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #fff;
+}
+
+/* === 🪟 GENERAL ROW GRID === */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+/* === 💬 BANNER === */
+.banner {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.banner h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.banner p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* === 🧠 SESSION SETUP ROWS === */
+.accent-row { margin-bottom: 16px; }
+.session-row { margin-bottom: 24px; }
+.start-container { text-align: right; }
+.links-row {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.manage-row {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* === 🔘 BUTTON STYLES === */
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  transform: scale(1);
+}
+
+/* Button colors */
+.start-btn { background: var(--success); color: #fff; }
+.view-btn { background: var(--accent-2); color: #fff; }
+.progress-btn {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+}
+.manage-btn {
+  background: var(--dark);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Hover animations */
+.btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions */
+button,
+a {
+  transition: background 0.25s ease, transform 0.2s ease, filter 0.2s ease;
+}
+
+/* === 🗣️ FLASHCARD AREA === */
+.center { text-align: center; }
+
+#card {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 800;
+  margin: 24px 0 10px;
+}
+#translation {
+  font-size: clamp(22px, 3.2vw, 34px);
+  color: var(--muted);
+  margin-bottom: 18px;
+  display: none;
+}
+#progress {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* === 🪄 ANIMATION: Panel fade-in === */
+.panel {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+.panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* === 📚 ADD.HTML PAGE STYLES === */
+
+body.add-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.add-page h2,
+.add-page h3 {
+  margin-bottom: 12px;
+}
+
+.add-page .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.add-page input,
+.add-page select,
+.add-page button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.add-page button {
+  cursor: pointer;
+  background: var(--accent-2);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.add-page button:hover { opacity: 0.9; }
+
+.add-page a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.add-page table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.add-page th,
+.add-page td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.add-page th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.add-page tr:hover td {
+  background: #f9fafb;
+}
+
+.add-page .btn-delete {
+  background: var(--danger);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+

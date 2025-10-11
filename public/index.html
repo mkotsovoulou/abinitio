@@ -5,210 +5,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Spanish Flashcards</title>
-  <style>
-    :root {
-      --bg: #f7f7fb;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --accent: #7c3aed;
-      --accent-2: #2563eb;
-      --success: #10b981;
-      --danger: #ef4444;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: grid;
-      place-items: center;
-      min-height: 100vh;
-      padding: 16px;
-    }
-
-    .panel {
-      width: min(920px, 100%);
-      background: var(--card);
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-      padding: 24px;
-      display: none;
-    }
-
-    .panel.active {
-      display: block;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--accent-2);
-      margin-bottom: 4px;
-    }
-
-    h2 {
-      margin: 0 0 12px;
-      font-weight: 700;
-    }
-
-    label {
-      font-weight: 600;
-    }
-
-    select,
-    input[type="number"] {
-      width: 100%;
-      padding: 12px 14px;
-      margin-top: 6px;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      font-size: 16px;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      /* 3 columns: chapter, words, start */
-      gap: 16px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-know {
-      background: var(--success);
-      color: #fff;
-    }
-
-    .btn-dontknow {
-      background: var(--danger);
-      color: #fff;
-    }
-
-    .btn-next {
-      background: var(--accent-2);
-      color: #fff;
-      display: none;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    #card {
-      font-size: clamp(36px, 6vw, 72px);
-      font-weight: 800;
-      margin: 24px 0 10px;
-    }
-
-    #translation {
-      font-size: clamp(22px, 3.2vw, 34px);
-      color: var(--muted);
-      margin-bottom: 18px;
-      display: none;
-    }
-
-    #progress {
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .banner {
-      background: linear-gradient(90deg, var(--accent-2), var(--accent));
-      color: white;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .banner p {
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.4;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Setup -->
-  <section id="setup" class="panel active">
-    <div class="banner">
-      <h1>¡Bienvenido!</h1>
-      <p>Welcome to <strong>Spanish Flashcards</strong> — choose a chapter, start learning, or add new words!</p>
+<!-- Setup -->
+<section id="setup" class="panel active">
+  <div class="banner">
+    <h1>¡Bienvenido!</h1>
+    <p>
+      Welcome to <strong>Spanish Flashcards</strong> — choose a chapter,
+      start learning, or manage your vocabulary collection.
+    </p>
+  </div>
+
+  <!-- 🎙️ Accent selector (first row) -->
+  <div class="row accent-row">
+    <div>
+      <label for="voiceSelect">Choose Accent</label>
+      <select id="voiceSelect">
+        <option value="es-ES-Neural2-A">🇪🇸 Spanish (Spain) – Female</option>
+        <option value="es-ES-Neural2-B">🇪🇸 Spanish (Spain) – Male</option>
+        <option value="es-MX-Neural2-A">🇲🇽 Spanish (Mexico) – Female</option>
+        <option value="es-MX-Neural2-B">🇲🇽 Spanish (Mexico) – Male</option>
+        <option value="es-US-Neural2-A">🇺🇸 Spanish (US) – Female</option>
+        <option value="es-US-Neural2-B">🇺🇸 Spanish (US) – Male</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 🧠 Chapter + Word count + Start session -->
+  <div class="row session-row">
+    <div>
+      <label for="chapterSelect">Chapter</label>
+      <select id="chapterSelect">
+        <option value="">Select a chapter…</option>
+      </select>
     </div>
 
-    <!-- 🎙️ Accent selector (top row) -->
-    <div class="row" style="margin-bottom: 16px;">
-      <div>
-        <label for="voiceSelect" style="font-weight:600;">Choose Accent</label>
-        <select id="voiceSelect"
-          style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e5e7eb; font-size:16px;">
-          <option value="es-ES-Neural2-A">🇪🇸 Spanish (Spain) – Female</option>
-          <option value="es-ES-Neural2-B">🇪🇸 Spanish (Spain) – Male</option>
-          <option value="es-MX-Neural2-A">🇲🇽 Spanish (Mexico) – Female</option>
-          <option value="es-MX-Neural2-B">🇲🇽 Spanish (Mexico) – Male</option>
-          <option value="es-US-Neural2-A">🇺🇸 Spanish (US) – Female</option>
-          <option value="es-US-Neural2-B">🇺🇸 Spanish (US) – Male</option>
-        </select>
-      </div>
+    <div>
+      <label for="wordCount">Number of words</label>
+      <input type="number" id="wordCount" min="1" value="10" />
     </div>
 
-    <!-- 🧠 Chapter + Word count + Start session (single line) -->
-    <div class="row" style="align-items: end;">
-      <div>
-        <label for="chapterSelect">Chapter</label>
-        <select id="chapterSelect">
-          <option value="">Select a chapter…</option>
-        </select>
-      </div>
-      <div>
-        <label for="wordCount">Number of words</label>
-        <input type="number" id="wordCount" min="1" value="10" />
-      </div>
-      <div style="display:flex; align-items:flex-end;">
-        <button id="startBtn" class="btn"
-          style="background: var(--success); color:#fff; margin-top: 6px; white-space:nowrap;">
-          ▶️ Start Session
-        </button>
-      </div>
+    <div class="start-container">
+      <button id="startBtn" class="btn start-btn">▶️ Start Session</button>
     </div>
+  </div>
 
-    <!-- 📚 View sessions and progress -->
-    <div style="margin-top: 24px; display:flex; flex-wrap:wrap; gap:12px;">
-      <button id="viewLogsBtn" class="btn" style="background: var(--accent-2); color: white;">📊 View Study
-        Sessions</button>
-      <a href="/progress.html" class="btn"
-        style="background: var(--accent); color:white; text-decoration:none; text-align:center;">📈 View My Progress</a>
-    </div>
+  <!-- 📚 View sessions & progress -->
+  <div class="links-row">
+    <button id="viewLogsBtn" class="btn view-btn">📊 View Study Sessions</button>
+    <a href="/progress.html" class="btn progress-btn">📈 View My Progress</a>
+  </div>
 
-    <!-- ➕ Add/manage words -->
-    <div style="margin-top: 16px; text-align:center;">
-      <a href="/add.html" style="display:inline-block; background: #374151; color:#fff; padding:10px 16px; border-radius:10px;
-              text-decoration:none; font-weight:600;">
-        ➕ Add or Manage Words
-      </a>
-    </div>
-  </section>
+  <!-- ➕ Add/manage words -->
+  <div class="manage-row">
+    <a href="/add.html" class="btn manage-btn">➕ Add or Manage Words</a>
+  </div>
+</section>
+
 
   <!-- Flashcard -->
   <section id="flashcard" class="panel">
