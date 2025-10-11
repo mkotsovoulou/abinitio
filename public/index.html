@@ -298,13 +298,23 @@ async function endSession() {
   const score = results.filter(r => r.known).length; 
   
   // Display a message to the user
-  $("card").textContent = `✅ Session complete! You got ${score}/${sessionCards.length} correct.`;
+   $("card").innerHTML = `
+    ✅ Session complete!<br>
+    You got <strong>${score}/${sessionCards.length}</strong> correct.<br><br>
+    <button id="homeBtn" class="btn btn-primary">🏠 Back to Home</button>
+  `;
+  
   $("translation").style.display = "none";
   $("knowBtn").style.display = "none";
   $("dontKnowBtn").style.display = "none";
   $("nextBtn").style.display = "none";
   $("progress").textContent = "";
+  
 
+    // 🏠 add event listener for the new button
+  document.getElementById("homeBtn").onclick = () => showPanel("setup");
+
+  
   // Save the log entry to the backend
   try {
     await saveLogEntry();
