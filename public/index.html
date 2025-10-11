@@ -296,12 +296,7 @@ function nextCard(){ currentIndex++; showCard(); }
 async function endSession() {
   // Calculate the score (e.g., how many were marked known)
   const score = results.filter(r => r.known).length; 
-  const results = sessionCards.map(c => ({
-    es: c.es,
-    en: c.en,
-    known: c.known || false
-  }));
-
+  
   // Display a message to the user
   $("card").textContent = `✅ Session complete! You got ${score}/${sessionCards.length} correct.`;
   $("translation").style.display = "none";
