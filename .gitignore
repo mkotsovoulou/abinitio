@@ -1,7 +1,6 @@
 # VS Code
 .vscode/
 *.code-workspace
-flashcards.db
 
 # Local History for Visual Studio Code
 .history/

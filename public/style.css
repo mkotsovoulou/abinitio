@@ -101,9 +101,27 @@ input[type="number"] {
   flex-wrap: wrap;
   gap: 12px;
 }
+/* === ➕ Manage Words button (setup panel) === */
 .manage-row {
   margin-top: 20px;
-  text-align: center;
+  text-align: right;        /* ✅ align to the far right */
+}
+
+.manage-btn {
+  background: #9ca3af;      /* ✅ lighter neutral gray tone */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover animation */
+.manage-btn:hover {
+  filter: brightness(1.15);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* === 🔘 BUTTON STYLES === */
