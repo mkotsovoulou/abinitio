@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Progress Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="progress-page">
+  <h1>Study</h1>
+  <a href="/index.html" class="btn">⬅ Back to Home</a>
+
+  <div class="image-selector">
+    <label for="imageDropdown">Select an image:</label>
+    <select id="imageDropdown">
+      <option value="">-- Choose an image --</option>
+      <option value="AtributosOersonales.png">Atributos Personales</option>
+      <option value="ElAspectoFisico.png">El Aspecto Fisico</option>
+      <option value="ElBario.png">El Bario</option>
+      <option value="Frequencia.png">Frequencia</option>
+      <option value="LaComida1.png">La Comida 1</option>
+      <option value="LaComida2.png">La Comida 2</option>
+      <option value="MiBario.png">Mi Bario</option>
+      <option value="RoutinaDaria.png">Routina Daria</option>
+    </select>
+  </div>
+
+  <div id="imageContainer" style="margin-top: 20px; text-align: center;">
+    <!-- Selected image will appear here -->
+  </div>
+
+  <script>
+    const dropdown = document.getElementById('imageDropdown');
+    const imageContainer = document.getElementById('imageContainer');
+
+    dropdown.addEventListener('change', function() {
+      const selectedImage = this.value;
+      
+      // Clear previous image
+      imageContainer.innerHTML = '';
+      
+      if (selectedImage) {
+        // Create and display the selected image
+        const img = document.createElement('img');
+        img.src = 'images/' + selectedImage;
+        img.alt = selectedImage;
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        img.style.border = '1px solid #ddd';
+        img.style.borderRadius = '4px';
+        img.style.padding = '5px';
+        imageContainer.appendChild(img);
+      }
+    });
+  </script>
+
+</body>
+</html>
