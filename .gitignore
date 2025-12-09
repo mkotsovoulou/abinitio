@@ -22,3 +22,5 @@ google-tts-key.json
 **/obj/
 *.cache
 *.log
+*.sql
+*.txt
