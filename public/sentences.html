@@ -140,16 +140,15 @@
       $("spanishSentence").innerHTML = `
         ✅ Practice Complete!<br>
         You reviewed <strong>${sentences.length}</strong> sentences.<br><br>
-        <button id="homeBtn" class="btn btn-primary">🏠 Back to Home</button>
+        <button id="restartBtn" class="btn" style="background: var(--accent-2); color: #fff;">🔄 Restart</button>
       `;
       $("englishSentence").style.display = "none";
-      $("revealBtn").style.display = "none";
       $("nextBtn").style.display = "none";
       $("speakBtn").style.display = "none";
       $("sentenceProgress").textContent = "";
       
-      document.getElementById("homeBtn").onclick = () => {
-        window.location.href = "/index.html";
+      document.getElementById("restartBtn").onclick = () => {
+        location.reload();
       };
     }
 
