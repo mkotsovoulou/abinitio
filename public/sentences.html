@@ -48,6 +48,19 @@
     <a href="/index.html" class="btn">⬅ Back to Home</a>
 
     <div class="panel active" style="margin-top: 20px;">
+      <!-- Voice selector -->
+      <div style="margin-bottom: 20px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center;">
+        <label for="voiceSelect" style="font-weight: 600;">Choose Accent:</label>
+        <select id="voiceSelect" style="padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 16px;">
+          <option value="es-ES-Neural2-A">🇪🇸 Spanish (Spain) – Female</option>
+          <option value="es-ES-Neural2-B">🇪🇸 Spanish (Spain) – Male</option>
+          <option value="es-MX-Neural2-A">🇲🇽 Spanish (Mexico) – Female</option>
+          <option value="es-MX-Neural2-B">🇲🇽 Spanish (Mexico) – Male</option>
+          <option value="es-US-Neural2-A">🇺🇸 Spanish (US) – Female</option>
+          <option value="es-US-Neural2-B">🇺🇸 Spanish (US) – Male</option>
+        </select>
+      </div>
+
       <div class="progress-text" id="sentenceProgress"></div>
       
       <div class="sentence-card" id="spanishSentence">Loading sentences...</div>
@@ -68,6 +81,17 @@
     let revealed = false;
 
     function $(id) { return document.getElementById(id); }
+
+    // Load saved voice preference or use default
+    function loadVoicePreference() {
+      const savedVoice = localStorage.getItem("selectedVoice") || "es-ES-Neural2-A";
+      $("voiceSelect").value = savedVoice;
+    }
+
+    // Save voice preference when changed
+    $("voiceSelect").addEventListener("change", function() {
+      localStorage.setItem("selectedVoice", this.value);
+    });
 
     async function loadSentences() {
       try {
@@ -133,18 +157,14 @@
       };
     }
 
-    function shuffle(a) {
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    }
-
     // Speak button
     $("speakBtn").onclick = async () => {
       const currentSentence = sentences[currentIndex];
       if (!currentSentence) return;
+
+      const selectedVoice = $("voiceSelect").value;
+      const selectedLang = selectedVoice.startsWith("es-MX") ? "es-MX" :
+        selectedVoice.startsWith("es-US") ? "es-US" : "es-ES";
 
       try {
         const res = await fetch("/api/tts", {
@@ -152,8 +172,8 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             text: currentSentence.spanish_sentence,
-            lang: "es-ES",
-            voiceName: "es-ES-Neural2-A"
+            lang: selectedLang,
+            voiceName: selectedVoice
           })
         });
         const blob = await res.blob();
@@ -168,6 +188,8 @@
     $("revealBtn").onclick = revealTranslation;
     $("nextBtn").onclick = nextSentence;
 
+    // Initialize voice preference and load sentences
+    loadVoicePreference();
     loadSentences();
   </script>
 </body>
