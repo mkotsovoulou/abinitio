@@ -137,15 +137,16 @@
     }
 
     function endSession() {
-      $("spanishSentence").innerHTML = `
-        ✅ Practice Complete!<br>
-        You reviewed <strong>${sentences.length}</strong> sentences.<br><br>
-        <button id="restartBtn" class="btn" style="background: var(--accent-2); color: #fff;">🔄 Restart</button>
-      `;
-      $("englishSentence").style.display = "none";
+      $("spanishSentence").innerHTML = `✅ Practice Complete!`;
+      $("englishSentence").innerHTML = `You reviewed <strong>${sentences.length}</strong> sentences.`;
+      $("englishSentence").style.display = "flex";
       $("nextBtn").style.display = "none";
       $("speakBtn").style.display = "none";
       $("sentenceProgress").textContent = "";
+      
+      // Replace controls with restart button
+      const controls = document.querySelector(".sentence-controls");
+      controls.innerHTML = `<button id="restartBtn" class="btn" style="background: var(--accent-2); color: #fff;">🔄 Restart</button>`;
       
       document.getElementById("restartBtn").onclick = () => {
         location.reload();
