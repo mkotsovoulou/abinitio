@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Practice Sentences</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .sentence-card {
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 700;
+      margin: 24px 0 10px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sentence-translation {
+      font-size: clamp(18px, 3vw, 28px);
+      color: var(--muted);
+      margin-bottom: 18px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sentence-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .progress-text {
+      color: var(--muted);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="progress-page">
+  <h1>Practice Sentences</h1>
+  <a href="/index.html" class="btn">⬅ Back to Home</a>
+
+  <div class="panel" style="margin-top: 20px;">
+    <div class="progress-text" id="sentenceProgress"></div>
+    
+    <div class="sentence-card" id="spanishSentence">Loading sentences...</div>
+    
+    <div class="sentence-translation" id="englishSentence" style="display: none;"></div>
+    
+    <div class="sentence-controls">
+      <button id="revealBtn" class="btn" style="background: var(--accent-2); color: #fff;">👁️ Reveal Translation</button>
+      <button id="speakBtn" class="btn" style="background: #3b82f6; color: #fff;">🔊 Speak</button>
+      <button id="nextBtn" class="btn btn-next" style="display: none;">Next Sentence →</button>
+    </div>
+  </div>
+
+  <script>
+    let sentences = [];
+    let currentIndex = 0;
+    let revealed = false;
+
+    function $(id) { return document.getElementById(id); }
+
+    async function loadSentences() {
+      try {
+        const res = await fetch("/api/sentences");
+        sentences = await res.json();
+        if (sentences.length === 0) {
+          $("spanishSentence").textContent = "No sentences available yet.";
+          return;
+        }
+        // Shuffle sentences
+        sentences = shuffle(sentences);
+        currentIndex = 0;
+        showSentence();
+      } catch (err) {
+        console.error("Error loading sentences:", err);
+        $("spanishSentence").textContent = "Error loading sentences. Please refresh the page.";
+      }
+    }
+
+    function showSentence() {
+      if (currentIndex >= sentences.length) {
+        endSession();
+        return;
+      }
+
+      const sentence = sentences[currentIndex];
+      $("sentenceProgress").textContent = `Sentence ${currentIndex + 1} of ${sentences.length}`;
+      $("spanishSentence").textContent = sentence.spanish_sentence;
+      $("englishSentence").textContent = sentence.english_sentence;
+      $("englishSentence").style.display = "none";
+      $("revealBtn").style.display = "inline-block";
+      $("nextBtn").style.display = "none";
+      $("speakBtn").style.display = "inline-block";
+      revealed = false;
+    }
+
+    function revealTranslation() {
+      if (!revealed) {
+        $("englishSentence").style.display = "flex";
+        $("revealBtn").style.display = "none";
+        $("nextBtn").style.display = "inline-block";
+        revealed = true;
+      }
+    }
+
+    function nextSentence() {
+      currentIndex++;
+      showSentence();
+    }
+
+    function endSession() {
+      $("spanishSentence").innerHTML = `
+        ✅ Practice Complete!<br>
+        You reviewed <strong>${sentences.length}</strong> sentences.<br><br>
+        <button id="homeBtn" class="btn btn-primary">🏠 Back to Home</button>
+      `;
+      $("englishSentence").style.display = "none";
+      $("revealBtn").style.display = "none";
+      $("nextBtn").style.display = "none";
+      $("speakBtn").style.display = "none";
+      $("sentenceProgress").textContent = "";
+      
+      document.getElementById("homeBtn").onclick = () => {
+        window.location.href = "/index.html";
+      };
+    }
+
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // Speak button
+    $("speakBtn").onclick = async () => {
+      const currentSentence = sentences[currentIndex];
+      if (!currentSentence) return;
+
+      try {
+        const res = await fetch("/api/tts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: currentSentence.spanish_sentence,
+            lang: "es-ES",
+            voiceName: "es-ES-Neural2-A"
+          })
+        });
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audio.play();
+      } catch (err) {
+        console.error("TTS error:", err);
+      }
+    };
+
+    $("revealBtn").onclick = revealTranslation;
+    $("nextBtn").onclick = nextSentence;
+
+    loadSentences();
+  </script>
+</body>
+</html>

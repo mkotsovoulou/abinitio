@@ -76,6 +76,24 @@ app.get("/api/flashcards", async (req, res) => {
 });
 
 // ──────────────────────────────────────────────────────────────
+// GET SENTENCES
+// ──────────────────────────────────────────────────────────────
+app.get("/api/sentences", async (req, res) => {
+  try {
+    const sentences = (await db.execute(
+      `SELECT id, spanish_sentence, english_sentence
+       FROM sentences
+       ORDER BY id`
+    )).rows;
+
+    res.json(sentences);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ──────────────────────────────────────────────────────────────
 // LOG SESSION + UPDATE WORD PROGRESS
 // ──────────────────────────────────────────────────────────────
 app.post("/api/log", async (req, res) => {
