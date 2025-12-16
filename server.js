@@ -80,11 +80,17 @@ app.get("/api/flashcards", async (req, res) => {
 // ──────────────────────────────────────────────────────────────
 app.get("/api/sentences", async (req, res) => {
   try {
-    const sentences = (await db.execute(
+    const result = await db.execute(
       `SELECT id, spanish_sentence, english_sentence
        FROM sentences
        ORDER BY id`
-    )).rows;
+    );
+    
+    const sentences = result.rows.map(row => ({
+      id: row.id,
+      spanish_sentence: row.spanish_sentence,
+      english_sentence: row.english_sentence
+    }));
 
     res.json(sentences);
   } catch (err) {
