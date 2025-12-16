@@ -65,12 +65,11 @@
       
       <div class="sentence-card" id="spanishSentence">Loading sentences...</div>
       
-      <div class="sentence-translation" id="englishSentence" style="display: none;"></div>
+      <div class="sentence-translation" id="englishSentence"></div>
       
       <div class="sentence-controls">
-        <button id="revealBtn" class="btn" style="background: var(--accent-2); color: #fff;">👁️ Reveal Translation</button>
         <button id="speakBtn" class="btn" style="background: #3b82f6; color: #fff;">🔊 Speak</button>
-        <button id="nextBtn" class="btn btn-next" style="display: none;">Next Sentence →</button>
+        <button id="nextBtn" class="btn" style="background: var(--success); color: #fff;">Next Sentence →</button>
       </div>
     </div>
   </div>
@@ -119,9 +118,6 @@
       $("sentenceProgress").textContent = `Sentence ${currentIndex + 1} of ${sentences.length}`;
       $("spanishSentence").textContent = sentence.spanish_sentence;
       $("englishSentence").textContent = sentence.english_sentence;
-      $("englishSentence").style.display = "none";
-      $("revealBtn").style.display = "inline-block";
-      $("nextBtn").style.display = "none";
       $("speakBtn").style.display = "inline-block";
       revealed = false;
     }
@@ -185,7 +181,6 @@
       }
     };
 
-    $("revealBtn").onclick = revealTranslation;
     $("nextBtn").onclick = nextSentence;
 
     // Initialize voice preference and load sentences
